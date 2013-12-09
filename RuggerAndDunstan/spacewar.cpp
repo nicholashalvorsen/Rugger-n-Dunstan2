@@ -266,7 +266,7 @@ void Spacewar::initialize(HWND hwnd)
 		pBullets[i].setActiveAndVisible(false);
 		pBullets[i].setX(10 + i*5);
 		pBullets[i].setY(10);
-		pBullets[i].setScale(.25);
+		pBullets[i].setScale(.45);
 	}
 
 	for(int i=0; i<spacewarNS::NUM_WALLS; i++)
@@ -323,6 +323,9 @@ void Spacewar::initialize(HWND hwnd)
 //=============================================================================
 void Spacewar::update()
 {
+	if (input->isKeyDown(VK_BACK))
+		audio->stopCue(BACKGROUND_MUSIC);
+
     if (menuOn)
     {
 		if (!died)
