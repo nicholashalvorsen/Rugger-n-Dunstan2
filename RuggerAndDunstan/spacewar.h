@@ -72,17 +72,20 @@ class Spacewar : public Game
 private:
     // game items
     TextureManager menuTexture, deadMenuTexture, gameTextures, backgroundTexture, ruggerTexture, 
-		enemy1Texture, background2Texture, background3Texture, visionTexture, trapDoorTexture, gameOverTM;   // textures
+		enemy1Texture, background2Texture, background3Texture, visionTexture, trapDoorTexture, gameOverTM,
+		cutscene1Texture, cutscene2Texture, cutscene3Texture;   // textures
 	Rugger  rugger;				// the one and only
     Image   menu;
 	Image	deadMenu;
 	Image	background;
 	Image	background2;
 	Image	background3;
+	Entity	cutscene1;
+	Entity	cutscene2;
+	Entity	cutscene3;
 	Image	gameOverBackground;
 	Enemy1	enemy1_1, enemy1_2, enemy1_3, enemy1_4, enemy2_1, enemy2_2, enemy2_3, enemy2_4;
-	Vision vision1;
-	//Vision vision1_1, vision1_2, vision1_3, vision1_4, vision2_1, vision2_2, vision2_3, vision2_4;
+	Vision  vision1;
 	Entity  trapDoor;
     Bar     healthBar;          // health bar for ships
     TextDX  fontBig;            // DirectX font for game banners
@@ -92,7 +95,7 @@ private:
     bool    countDownOn;        // true when count down is displayed
     float   countDownTimer;
 	float	menuFade;
-    char buffer[spacewarNS::BUF_SIZE];
+    char    buffer[spacewarNS::BUF_SIZE];
     bool    roundOver;          // true when round is over
     float   roundTimer;         // time until new round starts
 	vector<Enemy1*> enemies;
@@ -101,6 +104,7 @@ private:
 	double gameTime;
 	bool invincible;
 	int timeDone;
+	double inCutscene;
 
 	TextureManager gravTM;
 	Entity gravBall;
@@ -158,6 +162,8 @@ public:
 	bool areAllEnemiesDead();
 	void startRoom(int roomNum);
 	void shootingAI();
+	void playCutscene(int num);
+	void stopCutscene();
 };
 
 #endif

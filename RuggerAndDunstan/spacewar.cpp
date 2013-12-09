@@ -29,6 +29,7 @@ Spacewar::Spacewar()
 	gameOver = false;
 	invincible = false;
 	timeDone = 0;
+	inCutscene = -1;
 }
 
 //=============================================================================
@@ -78,6 +79,18 @@ void Spacewar::initialize(HWND hwnd)
     // background texture
     if (!background3Texture.initialize(graphics,BACKGROUND3_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background3 texture"));
+
+	// cutscene texture
+    if (!cutscene1Texture.initialize(graphics,CUTSCENE1_IMAGE))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene1 texture"));
+
+	// cutscene texture
+    if (!cutscene2Texture.initialize(graphics,CUTSCENE2_IMAGE))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene2 texture"));
+
+	// cutscene texture
+    if (!cutscene3Texture.initialize(graphics,CUTSCENE3_IMAGE))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene3 texture"));
 	
 	if(!gameOverTM.initialize(graphics, GAMEOVER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error init gameover texture"));
@@ -134,6 +147,21 @@ void Spacewar::initialize(HWND hwnd)
     if (!background3.initialize(graphics,0,0,0,&background3Texture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background3"));
 
+	// cutscene
+    if (!cutscene1.initialize(this, 1500, 720, 0, &cutscene1Texture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene1"));
+	cutscene1.setActive(false);
+
+		// cutscene
+    if (!cutscene2.initialize(this, 1500, 720, 0, &cutscene2Texture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene2"));
+	cutscene2.setActive(false);
+
+		// cutscene
+    if (!cutscene3.initialize(this, 1500, 720, 0, &cutscene3Texture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cutscene3"));
+	cutscene3.setActive(false);
+
 	 // menu iamge
     if (!menu.initialize(graphics, 1280, 720 ,0,&menuTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
@@ -152,6 +180,8 @@ void Spacewar::initialize(HWND hwnd)
 	 // trapDoor
     if (!trapDoor.initialize(this, 64, 64, 0, &trapDoorTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing trapdoor"));
+
+
 
 	//Gravity ball
 	if(!gravBall.initialize(this, 128, 128, 0, &gravTM))
@@ -324,6 +354,33 @@ void Spacewar::update()
         if(countDownTimer <= 0)
             countDownOn = false;
     } 
+	else if (inCutscene >= 0)
+	{
+
+		inCutscene+= frameTime;
+		if (inCutscene > 5)
+		{
+			inCutscene = -1;
+			cutscene1.setActiveAndVisible(false);
+			cutscene2.setActiveAndVisible(false);
+			cutscene3.setActiveAndVisible(false);
+		}
+		
+		Entity * cutscene;
+		switch(currentRoom)
+		{
+		case 0: cutscene = &cutscene1; break;
+		case 1: cutscene = &cutscene2; break;
+		case 2: cutscene = &cutscene3; break;
+		default: break;
+		}
+
+		cutscene->setX(cutscene->getX() + cutscene->getVelocity().x * frameTime);
+		cutscene->setY(cutscene->getY() + cutscene->getVelocity().y * frameTime);
+		
+		if(input->isKeyDown(VK_SPACE))
+			stopCutscene();
+	}
     else if (!menuOn)
     {
 		int directionX = 0;
@@ -489,9 +546,10 @@ void Spacewar::update()
 
     // Update the entities
     
-	if (!menuOn)
+	if (!menuOn && inCutscene == -1)
 	{
-		gameTime += frameTime;
+		if (!died)
+			gameTime += frameTime;
 
 		int oldx = rugger.getX();
 		int oldy = rugger.getY();
@@ -753,6 +811,13 @@ void Spacewar::render()
 
     //torpedo1.draw(graphicsNS::FILTER);      // draw the torpedoes using colorFilter
    // torpedo2.draw(graphicsNS::FILTER);
+	
+	if (cutscene1.getActive())
+		cutscene1.draw();
+	if (cutscene2.getActive())
+		cutscene2.draw();
+	if (cutscene3.getActive())
+		cutscene3.draw();
 
 	if (died || gameOver)
 		menuOn = true;
@@ -888,6 +953,7 @@ void Spacewar::startRoom(int roomNum)
 	died = false;
 	bulletDist = 0;
 	upDepressedLastFrame = false;
+	playCutscene(roomNum);
 
 	for (int i = 0; i < enemies.size(); i++)
 	{
@@ -909,7 +975,6 @@ void Spacewar::startRoom(int roomNum)
 	gravBall.setVisibleAndActive(false);
 
 	enemies.clear();
-	//vision.clear();
 
 	rugger.setX(20);
 	rugger.setY(GAME_HEIGHT / 2 - (ruggerNS::HEIGHT / 2));
@@ -921,7 +986,6 @@ void Spacewar::startRoom(int roomNum)
 		rugger.setX(spacewarNS::ROOM1_STARTING_X);
 		rugger.setY(spacewarNS::ROOM1_STARTING_Y);
 		rugger.setVisible(true);
-		//vision.push_back(&vision1_1);
 		enemies.push_back(&enemy1_1);
 		enemies[0]->setDegrees(-90);
 		enemies[0]->patternSteps[0].setAction(LEFT, 5);
@@ -935,12 +999,10 @@ void Spacewar::startRoom(int roomNum)
 		
 		
 		enemies.push_back(&enemy1_2);
-		//vision.push_back(&vision1_2);
 		enemies[1]->setDegrees(270);
 		enemies[1]->patternSteps[0].setAction(PAUSE, 10);
 
 		enemies.push_back(&enemy1_3);
-		//vision.push_back(&vision1_3);
 		enemies[2]->setDegrees(90);
 		enemies[2]->patternSteps[0].setAction(ROTATECW, 30);
 		enemies[2]->patternSteps[1].setAction(PAUSE, 3);
@@ -948,7 +1010,6 @@ void Spacewar::startRoom(int roomNum)
 		enemies[2]->patternSteps[3].setAction(PAUSE, 3);
 
 		enemies.push_back(&enemy1_4);
-		//vision.push_back(&vision1_4);
 		enemies[3]->setDegrees(0);
 		enemies[3]->patternSteps[0].setAction(PAUSE, 3);
 		//enemies[3]->patternSteps[1].setAction(UP, 6);
@@ -1018,8 +1079,6 @@ void Spacewar::startRoom(int roomNum)
 		enemies.push_back(&enemy2_2);
 		enemies[0]->setDegrees(-50);
 		enemies[1]->setDegrees(-45);
-		//vision.push_back(&vision2_1);
-		//vision.push_back(&vision2_2);
 		
 		//enemies[0]->patternSteps[0].setAction(ROTATECW, 90);
 		enemies[0]->patternSteps[1].setAction(PAUSE, 2);
@@ -1031,7 +1090,6 @@ void Spacewar::startRoom(int roomNum)
 		enemies[1]->patternSteps[2].setAction(ROTATECCW, 45);
 		enemies[1]->patternSteps[3].setAction(PAUSE, 2);
 
-		//vision.push_back(&vision2_3);
 		enemies.push_back(&enemy2_3);
 		enemies[2]->setDegrees(180);
 		//enemies[2]->patternSteps[0].setAction(LEFT, 10);
@@ -1044,7 +1102,6 @@ void Spacewar::startRoom(int roomNum)
 		//enemies[2]->patternSteps[7].setAction(ROTATECW, 180);
 		enemies[2]->patternSteps[0].setAction(PAUSE, 5);
 
-		//vision.push_back(&vision2_4);
 		enemies.push_back(&enemy2_4);
 		enemies[3]->setDegrees(90);
 		enemies[3]->patternSteps[0].setAction(RIGHT, 8);
@@ -1100,7 +1157,6 @@ void Spacewar::startRoom(int roomNum)
 		for(int i=0; i<spacewarNS::ROOM3EN_NUM; i++)  
 		{
 			enemies.push_back(&room3En[i]);	
-			//vision.push_back(&room3Vis[i]);
 			int iter = 1;
 			int switcher = 1;
 			for(int j=0; j<i; j++) iter *= -1;
@@ -1268,4 +1324,33 @@ void Spacewar::resetPos()
 		rugger.setY(spacewarNS::DEFAULT_STARTING_Y);
 		break;
 	}
+}
+
+void Spacewar::playCutscene(int num)
+{
+	Entity * cutscene;
+	inCutscene = 0;
+
+	switch(num)
+	{
+	case 0: cutscene = &cutscene1; break;
+	case 1: cutscene = &cutscene2; break;
+	case 2: cutscene = &cutscene3; break;
+	default: break;
+	}
+
+	cutscene->setVisibleAndActive(true);
+	cutscene->setX(0);
+	cutscene->setY(0);
+	cutscene->setVelocity(VECTOR2(-10, 0));
+	
+
+}
+
+void Spacewar::stopCutscene()
+{
+	inCutscene = -1;
+	cutscene1.setActive(false);
+	cutscene2.setActive(false);
+	cutscene3.setActive(false);
 }
