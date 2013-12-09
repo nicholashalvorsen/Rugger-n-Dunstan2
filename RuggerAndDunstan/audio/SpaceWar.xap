@@ -16,8 +16,8 @@ Global Settings
     Header File = SpaceWar.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 238072949;
-    Last Modified High = 30340199;
+    Last Modified Low = 537955411;
+    Last Modified High = 30340385;
 
     Category
     {
@@ -229,6 +229,8 @@ Wave Bank
     Xbox Bank Last Modified High = 0;
     PC Bank Last Modified Low = 238122954;
     PC Bank Last Modified High = 30340199;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 148984041;
     Bank Last Revised High = 30340199;
 
@@ -562,8 +564,8 @@ Sound Bank
     Windows File = Win\soundBank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 239573099;
-    Bank Last Modified High = 30340199;
+    Bank Last Modified Low = 537995411;
+    Bank Last Modified High = 30340385;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1198,6 +1200,7 @@ Sound Bank
 
             Play Wave Event
             {
+                Loop Count = 255;
                 Break Loop = 0;
                 Use Speaker Position = 0;
                 Use Center Speaker = 1;
