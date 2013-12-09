@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Audio" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KgAAAgIAAAAAAAAAAAEAAEEAAAAQAAAAAAAIAgAAAQA=</HashCode>
+      <FileName>audio.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Console" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCSQAAAAABCAAAAAAINACBAIAAAAgBgJFEFgCAAAAEA=</HashCode>
+      <FileName>console.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dxFont" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Entity" Collapsed="true">
+    <Position X="6.75" Y="10.25" Width="1.5" />
+    <InheritanceLine Type="Image" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="8.062" />
+        <Point X="3.5" Y="8.437" />
+        <Point X="7.312" Y="8.437" />
+        <Point X="7.312" Y="10.25" />
+      </Path>
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="0.08" Y="1.426" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <AssociationLine Name="audio" Type="Audio" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.562" Y="10.25" />
+        <Point X="7.562" Y="2.781" />
+        <Point X="6.25" Y="2.781" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="input" Type="Input" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.875" Y="10.25" />
+        <Point X="7.875" Y="1.344" />
+        <Point X="2" Y="1.344" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>kYhIhMgBSAgBhAAAYgNAQAgBACQBBBBIOARgIEAESAg=</HashCode>
+      <FileName>entity.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="audio" />
+      <Field Name="input" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAIAgUAwCABABBAAAEBAAQhAAyBEBgIIBAAAAgUICA=</HashCode>
+      <FileName>game.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="input" />
+      <Field Name="audio" />
+      <Field Name="console" />
+      <Field Name="graphics" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Graphics" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQgASgAEBIAkEIRAREEAAACACAQEBAQLqgECAAkAAAE=</HashCode>
+      <FileName>graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureManager" Collapsed="true">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAABAAAgAABIEAAAAABAABQAgAFAAAAAAAAEA=</HashCode>
+      <FileName>textureManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="textureData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Input" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A8AQRAABW0AROEOABMEIIEWYHEEAwBBUQFAIAAgBAgA=</HashCode>
+      <FileName>input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spacewar" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="Game" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.938" Y="3.062" />
+        <Point X="0.938" Y="3.395" />
+        <Point X="0.938" Y="3.395" />
+        <Point X="0.938" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="ship1" Type="Ship" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.188" Y="7.191" />
+        <Point X="1.188" Y="10.125" />
+        <Point X="2.75" Y="10.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="planet" Type="Planet" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.375" Y="7.191" />
+        <Point X="1.375" Y="9.096" />
+        <Point X="2.75" Y="9.096" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="gameTextures" Type="TextureManager">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.126" Y="-0.111" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="menuTexture" Type="TextureManager">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.138" Y="0.05" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="nebulaTexture" Type="TextureManager">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.138" Y="-0.234" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="menu" Type="Image" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.562" Y="7.191" />
+        <Point X="1.562" Y="7.938" />
+        <Point X="2.75" Y="7.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.088" Y="0.04" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="nebula" Type="Image" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.75" Y="7.191" />
+        <Point X="1.75" Y="7.609" />
+        <Point X="2.75" Y="7.609" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.06" Y="0.068" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="fontScore" Type="TextDX" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.312" Y="6.5" />
+        <Point X="1.312" Y="4.625" />
+        <Point X="3.75" Y="4.625" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ship2" Type="Ship" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1" Y="7.191" />
+        <Point X="1" Y="10.5" />
+        <Point X="2.75" Y="10.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="torpedo1" Type="Torpedo" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.812" Y="7.191" />
+        <Point X="0.812" Y="11.375" />
+        <Point X="2.75" Y="11.375" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="torpedo2" Type="Torpedo" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.641" Y="7.191" />
+        <Point X="0.641" Y="11.812" />
+        <Point X="2.75" Y="11.812" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="fontBig" Type="TextDX" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.688" Y="6.5" />
+        <Point X="1.688" Y="4.953" />
+        <Point X="3.75" Y="4.953" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAkABRAABgBFAAgEBEBgAABAAwgBJQABAAAIcCQA=</HashCode>
+      <FileName>spaceWar.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ship1" />
+      <Field Name="planet" />
+      <Field Name="gameTextures" />
+      <Field Name="menuTexture" />
+      <Field Name="nebulaTexture" />
+      <Field Name="menu" />
+      <Field Name="nebula" />
+      <Field Name="fontScore" />
+      <Field Name="ship2" />
+      <Field Name="torpedo1" />
+      <Field Name="torpedo2" />
+      <Field Name="fontBig" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Image" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAgAAYhAgDAELgEAALM+AIAACASpwDsCIACATmAEAkU=</HashCode>
+      <FileName>image.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="spriteData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TextDX" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAACAAAAACAAAJEAAgAAAAQAAAmAIAIQAAACAEA=</HashCode>
+      <FileName>textDX.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planet" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="Entity" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.062" Y="10.25" />
+        <Point X="7.062" Y="9.125" />
+        <Point X="4.25" Y="9.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAIAAAAAIAA=</HashCode>
+      <FileName>planet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ship" Collapsed="true">
+    <Position X="2.75" Y="10" Width="1.5" />
+    <InheritanceLine Type="Entity" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="10.375" />
+        <Point X="4.25" Y="10.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQCAiAogABC4OQIAAAAgCIRAAAAAAAAAQEAEA=</HashCode>
+      <FileName>ship.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Torpedo" Collapsed="true">
+    <Position X="2.75" Y="11.25" Width="1.5" />
+    <InheritanceLine Type="Entity" FixedFromPoint="true">
+      <Path>
+        <Point X="6.75" Y="10.75" />
+        <Point X="6.375" Y="10.75" />
+        <Point X="6.375" Y="11.596" />
+        <Point X="4.25" Y="11.596" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAABgAAAAAAQAAAAAAAAAAAAAAAAAAACBAAAAAAEAAA=</HashCode>
+      <FileName>torpedo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TextureData" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>graphics.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SpriteData" Collapsed="true">
+    <Position X="5.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAIAACABAAAgAAAABgAABAAAA=</HashCode>
+      <FileName>graphics.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

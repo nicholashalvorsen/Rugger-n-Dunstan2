@@ -1,0 +1,2 @@
+middle click: teleport to mouse position
+up arrow: toggle invincibility
