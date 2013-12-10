@@ -273,31 +273,6 @@ void Spacewar::initialize(HWND hwnd)
 		pBullets[i].setY(10);
 		pBullets[i].setScale(.45);
 	}
-
-	//for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-	//{
-	//	if(!wallLong[i].initialize(this, 32, 300, 0, &wallLongTM))
-	//		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall long"));
-	//	wallLong[i].setActiveAndVisible(false);
-	//	wallLong[i].setCollisionType(entityNS::BOX);
-	//	wallLong[i].setEdge(LONGRECT);
-	//	if(!wallLongH[i].initialize(this, 300, 32, 0, &wallLongHTM))
-	//		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall long h"));
-	//	wallLongH[i].setActiveAndVisible(false);
-	//	wallLongH[i].setCollisionType(entityNS::BOX);
-	//	wallLongH[i].setEdge(LONGHRECT);
-	//	if(!wallShort[i].initialize(this, 32, 150, 0, &wallShortTM))
-	//		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall short"));
-	//	wallShort[i].setActiveAndVisible(false);
-	//	wallShort[i].setCollisionType(entityNS::BOX);
-	//	wallShort[i].setEdge(SHORTRECT);
-	//	if(!wallShortH[i].initialize(this, 150, 32, 0, &wallShortHTM))
-	//		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall short h"));
-	//	wallShortH[i].setActiveAndVisible(false);
-	//	wallShortH[i].setCollisionType(entityNS::BOX);
-	//	wallShortH[i].setEdge(SHORTHRECT);
-	//	
-	//}
 	
 	if(!casket.initialize(this, 128, 64, 0, &casketTM))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing casket"));
@@ -484,12 +459,6 @@ void Spacewar::update()
 			rugger.setGraving(false);
 		}
 
-
-		/*if (directionX != 0 && directionY != 0)
-			rugger.setVelocity(VECTOR2(ruggerNS::SPEED * .80 * directionX, ruggerNS::SPEED * .80 * directionY));
-		else
-			rugger.setVelocity(VECTOR2(ruggerNS::SPEED * directionX, ruggerNS::SPEED * directionY));*/
-		
 		if (directionX != 0 && directionY != 0)
 		{
 			if (abs(rugger.getVelocity().x) < ruggerNS::SPEED * .80)
@@ -585,13 +554,7 @@ void Spacewar::update()
 		{
 			enemies[i]->update(frameTime);
 		}
-		//for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-		//{
-		//	wallLong[i].update(frameTime);
-		//	wallLongH[i].update(frameTime);
-		//	wallShort[i].update(frameTime);
-		//	wallShortH[i].update(frameTime);
-		//}
+
 		for(int i=0; i<walls.size(); i++) walls[i]->update(frameTime);
 		
 		for (int i = 0; i < enemies.size(); i++)
@@ -742,17 +705,9 @@ void Spacewar::render()
 	}
 	if(trapDoor.getActive())
 		trapDoor.draw();
-	//for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-	//{
-	//	wallLong[i].draw();
-	//	wallLongH[i].draw();
-	//	wallShort[i].draw();
-	//	wallShortH[i].draw();
-	//}
+
 	for(int i=0; i<walls.size(); i++)
-	{
 		walls[i]->draw();
-	}
 
 	rugger.draw();
 	casket.draw();
@@ -1026,13 +981,6 @@ void Spacewar::startRoom(int roomNum)
 		rugger.setX(spacewarNS::ROOM2_STARTING_X);
 		rugger.setY(spacewarNS::ROOM2_STARTING_Y);
 
-		/*for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-		{
-			wallLong[i].setActiveAndVisible(false);
-			wallLongH[i].setActiveAndVisible(false);
-			wallShort[i].setActiveAndVisible(false);
-			wallShortH[i].setActiveAndVisible(false);
-		}*/
 		enemies.push_back(&enemy2_1);
 		enemies.push_back(&enemy2_2);
 		enemies[0]->setDegrees(-50);
@@ -1082,13 +1030,7 @@ void Spacewar::startRoom(int roomNum)
 		rugger.setY(spacewarNS::ROOM3_STARTING_Y);
 		trapDoor.setX(spacewarNS::ROOM3_TRAPDOOR_X);
 		trapDoor.setY(spacewarNS::ROOM3_TRAPDOOR_Y);
-		/*for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-		{
-			wallLong[i].setActiveAndVisible(false);
-			wallLongH[i].setActiveAndVisible(false);
-			wallShort[i].setActiveAndVisible(false);
-			wallShortH[i].setActiveAndVisible(false);
-		}*/
+
 		for(int i=0; i<spacewarNS::ROOM3EN_NUM; i++)  
 		{
 			enemies.push_back(&room3En[i]);	

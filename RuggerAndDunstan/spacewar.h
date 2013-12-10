@@ -121,10 +121,6 @@ private:
 	TextureManager wallLongHTM;
 	TextureManager wallShortTM;
 	TextureManager wallShortHTM;
-	Entity wallLong[spacewarNS::NUM_WALLS];
-	Entity wallLongH[spacewarNS::NUM_WALLS];
-	Entity wallShort[spacewarNS::NUM_WALLS];
-	Entity wallShortH[spacewarNS::NUM_WALLS];
 
 	Enemy1 room3En[spacewarNS::ROOM3EN_NUM];
 	Vision room3Vis[spacewarNS::ROOM3EN_NUM];
