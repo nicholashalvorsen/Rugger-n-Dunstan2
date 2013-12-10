@@ -20,9 +20,13 @@
 #include "enemy.h"
 #include <sstream>
 #include <ctime>
-
+#include <fstream>
+#include <vector>
 using std::stringstream;
 using std::string;
+using std::ifstream;
+using std::ofstream;
+using std::vector;
 
 namespace spacewarNS
 {
@@ -61,6 +65,7 @@ namespace spacewarNS
 	const int ROOM3_TRAPDOOR_X = -1000;
 	const int ROOM3_TRAPDOOR_Y = -1000;
 	const int ROOM3EN_NUM = 7;
+	const int NUM_ROOMS = 3;
 
 }
 
@@ -141,6 +146,9 @@ private:
 	string dump, finput;
 	LPCSTR fileName;
 	HANDLE hFile;
+	ifstream fin;
+	ofstream fout;
+	vector<Entity*> walls;
 
 public:
     // Constructor
@@ -164,6 +172,7 @@ public:
 	void shootingAI();
 	void playCutscene(int num);
 	void stopCutscene();
+	void getWallPositions();
 };
 
 #endif
