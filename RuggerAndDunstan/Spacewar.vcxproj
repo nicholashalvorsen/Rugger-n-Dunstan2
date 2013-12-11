@@ -25,7 +25,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -99,6 +99,7 @@
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
     <ClCompile Include="patternStep.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Rugger.cpp" />
     <ClCompile Include="spacewar.cpp" />
     <ClCompile Include="textureManager.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="messageDialog.h" />
     <ClInclude Include="patternStep.h" />
+    <ClInclude Include="portal.h" />
     <ClInclude Include="Rugger.h" />
     <ClInclude Include="spacewar.h" />
     <ClInclude Include="textureManager.h" />

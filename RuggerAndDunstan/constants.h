@@ -40,6 +40,7 @@ const char BULLET_IMAGE[] =      "pictures\\bullet.png";
 const char ENEMY1_IMAGE[] =      "pictures\\enemy1.png";
 const char CAMERA_IMAGE[] =      "pictures\\camera.png";
 const char GRAV_IMAGE[] =        "pictures\\gravball.png";
+const char PORTAL_IMAGE[] =		 "pictures\\Portal.png";
 const char VISION_IMAGE[] =      "pictures\\vision.png";
 const char WALL_LONG_IMAGE[] =   "pictures\\wall_long.png";
 const char WALL_LONG_H_IMG[] =   "pictures\\wall_long_horiz.png";
@@ -57,6 +58,11 @@ const int RUGGER_COLS = 8;
 const int RUGGER_WIDTH = 32;
 const int RUGGER_HEIGHT = 32;
 
+const int PORTAL_ANIMATION_DELAY = 0.2f;
+const int PORTAL_COLS = 6;
+const int PORTAL_WIDTH = 35;
+const int PORTAL_HEIGHT = 35;
+
 const RECT LONGRECT = {-16, -150, 16, 150};
 const RECT LONGHRECT = {-150, -16, 150, 16};
 const RECT SHORTRECT = {-16, -75, 16, 75};
@@ -72,6 +78,10 @@ const int RUGGER_GRAV_START = 4;
 const int RUGGER_GRAV_END = 5;
 const int RUGGER_GUN_START = 6;
 const int RUGGER_GUN_END = 7;
+
+//PORTAL actions
+const int PORTAL_START = 0;
+const int PORTAL_END = 5;
 
 // audio files required by audio.cpp
 // WAVE_BANK must be location of .xwb file.
@@ -93,7 +103,7 @@ const char BACKGROUND_MUSIC[] = "ruggeranddunstan2";
 const char PLINK[]			= "plink";
 const char HITSMACK[]		= "hitsmack";
 const char WOH[]			= "woh";
-
+const char PORT[]			= "port";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used

@@ -16,6 +16,7 @@
 #include "ship.h"
 #include "torpedo.h"
 #include "Rugger.h"
+#include "Portal.h"
 #include "bullet.h"
 #include "enemy.h"
 #include <sstream>
@@ -65,6 +66,7 @@ namespace spacewarNS
 	const int ROOM3_TRAPDOOR_X = -1000;
 	const int ROOM3_TRAPDOOR_Y = -1000;
 	const int ROOM3EN_NUM = 7;
+	const int ROOM3PORT_NUM = 1;
 	const int NUM_ROOMS = 3;
 
 }
@@ -76,7 +78,7 @@ class Spacewar : public Game
 {
 private:
     // game items
-    TextureManager menuTexture, deadMenuTexture, gameTextures, backgroundTexture, ruggerTexture, 
+    TextureManager menuTexture, deadMenuTexture, gameTextures, backgroundTexture, ruggerTexture, portTexture,
 		enemy1Texture, background2Texture, background3Texture, visionTexture, trapDoorTexture, gameOverTM,
 		cutscene1Texture, cutscene2Texture, cutscene3Texture;   // textures
 	Rugger  rugger;				// the one and only
@@ -104,6 +106,7 @@ private:
     bool    roundOver;          // true when round is over
     float   roundTimer;         // time until new round starts
 	vector<Enemy1*> enemies;
+	vector<Portal*> portals;
 	Bullet bullet;
 	double bulletDist;
 	double gameTime;
@@ -113,6 +116,7 @@ private:
 
 	TextureManager gravTM;
 	Entity gravBall;
+	Entity portal;
 
 	Bullet pBullets[ruggerNS::NUM_BULLETS];
 	TextureManager bulletTM;
@@ -124,6 +128,7 @@ private:
 
 	Enemy1 room3En[spacewarNS::ROOM3EN_NUM];
 	Vision room3Vis[spacewarNS::ROOM3EN_NUM];
+	Portal room3Port[spacewarNS::ROOM3PORT_NUM];
 
 	TextureManager casketTM;
 	Entity casket;

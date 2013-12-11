@@ -112,6 +112,10 @@ void Spacewar::initialize(HWND hwnd)
 	if(!gravTM.initialize(graphics, GRAV_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing gravball texture"));
 	
+	//portal texture
+	if (!portTexture.initialize(graphics, PORTAL_IMAGE))
+		throw (GameError(gameErrorNS::FATAL_ERROR, "Error initializing portal texture"));
+
 	//trap door texture
 	if(!trapDoorTexture.initialize(graphics, TRAPDOOR_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing trap door texture"));
@@ -186,7 +190,11 @@ void Spacewar::initialize(HWND hwnd)
     if (!trapDoor.initialize(this, 64, 64, 0, &trapDoorTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing trapdoor"));
 
-
+	// portal
+	if(!portal.initialize(this, 35, 35, 6, &portTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing portal"));
+	portal.setActiveAndVisible(false);
+	
 
 	//Gravity ball
 	if(!gravBall.initialize(this, 128, 128, 0, &gravTM))
@@ -263,6 +271,13 @@ void Spacewar::initialize(HWND hwnd)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing room 3 enemies"));
 		room3En[i].setActiveAndVisible(false);
 	}
+
+	for (int i = 0; i < spacewarNS::ROOM3PORT_NUM; i++) {
+		if(!room3Port[i].initialize(this, enemy1NS::WIDTH, enemy1NS::HEIGHT, enemy1NS::TEXTURE_COLS, &portTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing room 3 portals"));
+		room3Port[i].setActiveAndVisible(false);
+	}
+
 
 	for(int i=0; i<ruggerNS::NUM_BULLETS; i++)
 	{
@@ -554,6 +569,9 @@ void Spacewar::update()
 		{
 			enemies[i]->update(frameTime);
 		}
+		for (int i = 0; i < portals.size(); i++)
+			if (portals[i]->getVisible()) 
+				portals[i]->update(frameTime);
 
 		for(int i=0; i<walls.size(); i++) walls[i]->update(frameTime);
 		
@@ -574,23 +592,6 @@ void Spacewar::update()
 //=============================================================================
 void Spacewar::roundStart()
 {
-    // Start ships on opposite sides of planet in stable clockwise orbit
-    /*ship1.setX(GAME_WIDTH/4 - shipNS::WIDTH);
-    ship2.setX(GAME_WIDTH - GAME_WIDTH/4);
-    ship1.setY(GAME_HEIGHT/2 - shipNS::HEIGHT);
-    ship2.setY(GAME_HEIGHT/2);
-    ship1.setVelocity(VECTOR2(0,-shipNS::SPEED));
-    ship2.setVelocity(VECTOR2(0,shipNS::SPEED));
-
-    ship1.setDegrees(0);
-    ship2.setDegrees(180);
-    ship1.repair();
-    ship2.repair();
-    countDownTimer = spacewarNS::COUNT_DOWN;
-    countDownOn = true;
-    roundOver = false;
-    ship1Scored = false;
-    ship2Scored = false;*/
 }
 
 //=============================================================================
@@ -622,6 +623,17 @@ void Spacewar::collisions()
 		audio->playCue(WOH);
 		currentRoom++;
 		startRoom(currentRoom);
+	}
+
+	for (int i = 0; i < portals.size(); i++) {
+		for (int j = 0; j < ruggerNS::NUM_BULLETS; j++) {
+			if (portals[i]->collidesWith(pBullets[j], collisionVector))
+			{
+				portals[i]->teleportTheThing();
+				pBullets[j].setX(portals[i]->getPortX());
+				pBullets[j].setY(portals[i]->getPortY());
+			}
+		}
 	}
 
 	for (int i = 0; i < enemies.size(); i++)
@@ -715,6 +727,9 @@ void Spacewar::render()
 	{
 		if(pBullets[i].getActive()) pBullets[i].draw();
 	}
+	for (int i = 0; i < portals.size(); i++)
+		if (portals[i]->getActive()) 
+			portals[i]->draw();
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if (enemies[i]->getActive())
@@ -854,6 +869,7 @@ void Spacewar::releaseAll()
 	ruggerTexture.onLostDevice();
 	enemy1Texture.onLostDevice();
 	visionTexture.onLostDevice();
+	portTexture.onLostDevice();
     fontScore.onLostDevice();
     fontBig.onLostDevice();
 	debugText.onLostDevice();
@@ -918,6 +934,11 @@ void Spacewar::startRoom(int roomNum)
 		}
 	}
 
+	for (int i = 0; i < portals.size(); i++){
+		portals[i]->setActive(false);
+		portals[i]->setVisible(false);
+	}
+
 	for (int i = 0; i < ruggerNS::NUM_BULLETS; i++)
 	{
 		pBullets[i].setActive(false);
@@ -927,7 +948,7 @@ void Spacewar::startRoom(int roomNum)
 	gravBall.setVisibleAndActive(false);
 
 	enemies.clear();
-
+	portals.clear();
 	rugger.setX(20);
 	rugger.setY(GAME_HEIGHT / 2 - (ruggerNS::HEIGHT / 2));
 
@@ -1023,6 +1044,8 @@ void Spacewar::startRoom(int roomNum)
 	}
 	if(roomNum == 2)
 	{
+		for (int i = 0; i < spacewarNS::ROOM3PORT_NUM; i++)
+			portals.push_back(&room3Port[i]);
 		casket.setActiveAndVisible(true);
 		casket.setX(GAME_WIDTH - 120);
 		casket.setY(15);
@@ -1075,6 +1098,9 @@ void Spacewar::startRoom(int roomNum)
 		getWallPositions();
 	}
 
+	for (int i = 0; i < portals.size(); i++) 
+		portals[i]->setActiveAndVisible(true);
+	
 	
 	for (int i = 0; i < enemies.size(); i++)
 	{
