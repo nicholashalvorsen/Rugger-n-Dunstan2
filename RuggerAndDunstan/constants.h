@@ -70,7 +70,7 @@ const RECT SHORTHRECT = {-75, -16, 75, 16};
 const RECT CASKETRECT = {-64, -32, 64, 32};
 
 //Rugger actions
-const int RUGGER_WALK_START = 1;			//1st row
+const int RUGGER_WALK_START = 1;
 const int RUGGER_WALK_END = 3;
 const int RUGGER_STILL_START = 0;
 const int RUGGER_STILL_END = 1;
@@ -81,7 +81,7 @@ const int RUGGER_GUN_END = 7;
 
 //PORTAL actions
 const int PORTAL_START = 0;
-const int PORTAL_END = 5;
+const int PORTAL_END = 0;
 
 // audio files required by audio.cpp
 // WAVE_BANK must be location of .xwb file.

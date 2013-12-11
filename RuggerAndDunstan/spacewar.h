@@ -65,8 +65,8 @@ namespace spacewarNS
 	const int ROOM2_TRAPDOOR_Y = 640;
 	const int ROOM3_TRAPDOOR_X = -1000;
 	const int ROOM3_TRAPDOOR_Y = -1000;
-	const int ROOM3EN_NUM = 7;
-	const int ROOM3PORT_NUM = 1;
+	const int ROOM3EN_NUM = 3;
+	const int ROOM3PORT_NUM = 3;
 	const int NUM_ROOMS = 3;
 
 }
