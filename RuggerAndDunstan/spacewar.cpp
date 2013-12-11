@@ -732,7 +732,7 @@ void Spacewar::collisions()
 			else if (pt == NOCOLLIDE && pt2 == NOCOLLIDE)
 				ruggerDist = -1;
 
-			if (ruggerDist != -1 && ruggerDist < minDist)
+			if (ruggerDist != -1 && ruggerDist < minDist && !invincible)
 			{
 				// rugger seen
 				died = true;
