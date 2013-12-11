@@ -33,5 +33,7 @@ public:
     void update(float frameTime);
 	int getPortX() {return goX;}
 	int getPortY() {return goY;}
+	void setPortGoX(int x){goX = x;}
+	void setPortGoY(int y){goY = y;}
 };
 #endif
