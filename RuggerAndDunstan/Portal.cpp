@@ -11,8 +11,6 @@ Portal::Portal() : Entity()
     spriteData.y = portalNS::Y;
     spriteData.rect.bottom = portalNS::HEIGHT;    // rectangle to select parts of an image
     spriteData.rect.right = portalNS::WIDTH;
-    velocity.x = 0;                             // velocity X
-    velocity.y = 0;                             // velocity Y
     frameDelay = portalNS::PORTAL_ANIMATION_DELAY;
     startFrame = portalNS::PORTAL_START_FRAME;     // first frame of ship animation
     endFrame     = portalNS::PORTAL_END_FRAME;     // last frame of ship animation
@@ -22,6 +20,7 @@ Portal::Portal() : Entity()
 	active = false;
 	goX = 0;
 	goY = 0;
+	rotatedThisManyFramesAgo = 0;
 }
 
 Portal::Portal(int posx, int posy, int goX, int goY) : Entity()
@@ -32,8 +31,6 @@ Portal::Portal(int posx, int posy, int goX, int goY) : Entity()
     spriteData.y = posy;
     spriteData.rect.bottom = portalNS::HEIGHT;    // rectangle to select parts of an image
     spriteData.rect.right = portalNS::WIDTH;
-    velocity.x = 0;                             // velocity X
-    velocity.y = 0;                             // velocity Y
     frameDelay = portalNS::PORTAL_ANIMATION_DELAY;
     startFrame = portalNS::PORTAL_START_FRAME;     // first frame of ship animation
     endFrame     = portalNS::PORTAL_END_FRAME;     // last frame of ship animation
@@ -43,6 +40,7 @@ Portal::Portal(int posx, int posy, int goX, int goY) : Entity()
 	active = false;
 	Portal::goX = goX;
 	Portal::goY = goY;
+	rotatedThisManyFramesAgo = 0;
 }
 
 
@@ -71,10 +69,12 @@ void Portal::draw()
 void Portal::update(float frameTime)
 {
     Entity::update(frameTime);
-    //spriteData.angle += frameTime * bulletNS::ROTATION_RATE;  // rotate the bullet
-    spriteData.x += frameTime * velocity.x;         // move bullet along X 
-    spriteData.y += frameTime * velocity.y;         // move bullet along Y
-	setFrames(portalNS::PORTAL_START_FRAME, portalNS::PORTAL_END_FRAME);
+	if (rotatedThisManyFramesAgo > 10) {
+		this->setRadians(this->getRadians()+1);
+		rotatedThisManyFramesAgo = 0;
+	} else {
+		rotatedThisManyFramesAgo++;
+	}
 }
 
 void Portal::teleportTheThing() {

@@ -875,10 +875,6 @@ void Spacewar::consoleCommand()
     {
         console->print("Console Commands:");
         console->print("fps - toggle display of frames per second");
-        /*console->print("gravity off - turns off planet gravity");
-        console->print("gravity on - turns on planet gravity");
-        console->print("planet off - disables planet");
-        console->print("planet on - enables planet");*/
         return;
     }
     if (command == "fps")
@@ -889,24 +885,6 @@ void Spacewar::consoleCommand()
         else
             console->print("fps Off");
     }
-
-    /*if (command == "gravity off")
-    {
-        planet.setMass(0);
-        console->print("Gravity Off");
-    }else if (command == "gravity on")
-    {
-        planet.setMass(planetNS::MASS);
-        console->print("Gravity On");
-    }else if (command == "planet off")
-    {
-        planet.disable();
-        console->print("Planet Off");
-    }else if (command == "planet on")
-    {
-        planet.enable();
-        console->print("Planet On");
-    }*/
 }
 
 //=============================================================================
@@ -1026,7 +1004,7 @@ void Spacewar::startRoom(int roomNum)
 		
 		enemies.push_back(&enemy1_2);
 		enemies[1]->setDegrees(270);
-		enemies[1]->patternSteps[0].setAction(PAUSE, 10);
+		enemies[1]->setX(enemies[1]->getX()-100);
 
 		enemies.push_back(&enemy1_3);
 		enemies[2]->setDegrees(90);
@@ -1038,13 +1016,6 @@ void Spacewar::startRoom(int roomNum)
 		enemies.push_back(&enemy1_4);
 		enemies[3]->setDegrees(0);
 		enemies[3]->patternSteps[0].setAction(PAUSE, 3);
-		//enemies[3]->patternSteps[1].setAction(UP, 6);
-		//enemies[3]->patternSteps[2].setAction(ROTATECCW, 90);
-		//enemies[3]->patternSteps[3].setAction(PAUSE, 3);
-		//enemies[3]->patternSteps[4].setAction(ROTATECCW, 90);
-		//enemies[3]->patternSteps[5].setAction(DOWN, 6);
-		//enemies[3]->patternSteps[6].setAction(ROTATECCW, 180);
-
 		getWallPositions();
 
 	}
@@ -1059,12 +1030,8 @@ void Spacewar::startRoom(int roomNum)
 		enemies.push_back(&enemy2_2);
 		enemies[0]->setDegrees(-50);
 		enemies[1]->setDegrees(-45);
-		
-		//enemies[0]->patternSteps[0].setAction(ROTATECW, 90);
-		enemies[0]->patternSteps[1].setAction(PAUSE, 2);
-		//enemies[0]->patternSteps[2].setAction(ROTATECCW, 90);
-		//enemies[0]->patternSteps[3].setAction(PAUSE, 2);
 
+		enemies[0]->patternSteps[1].setAction(PAUSE, 2);
 		enemies[1]->patternSteps[0].setAction(ROTATECW, 45);
 		enemies[1]->patternSteps[1].setAction(PAUSE, 2);
 		enemies[1]->patternSteps[2].setAction(ROTATECCW, 45);
@@ -1072,23 +1039,11 @@ void Spacewar::startRoom(int roomNum)
 
 		enemies.push_back(&enemy2_3);
 		enemies[2]->setDegrees(180);
-		//enemies[2]->patternSteps[0].setAction(LEFT, 10);
-		//enemies[2]->patternSteps[1].setAction(ROTATECCW, 90);
-		//enemies[2]->patternSteps[2].setAction(DOWN, 5);
-		//enemies[2]->patternSteps[3].setAction(ROTATECW, 180);
-		//enemies[2]->patternSteps[4].setAction(UP, 5);
-		//enemies[2]->patternSteps[5].setAction(ROTATECW, 180);
-		//enemies[2]->patternSteps[6].setAction(RIGHT, 10);
-		//enemies[2]->patternSteps[7].setAction(ROTATECW, 180);
 		enemies[2]->patternSteps[0].setAction(PAUSE, 5);
 
 		enemies.push_back(&enemy2_4);
 		enemies[3]->setDegrees(90);
 		enemies[3]->patternSteps[0].setAction(RIGHT, 8);
-		//enemies[2]->patternSteps[1].setAction(ROTATECCW, 90);
-		//enemies[2]->patternSteps[2].setAction(DOWN, 5);
-		//enemies[2]->patternSteps[3].setAction(ROTATECW, 180);
-		//enemies[2]->patternSteps[4].setAction(UP, 5);
 		enemies[3]->patternSteps[5].setAction(ROTATECCW, 180);
 		enemies[3]->patternSteps[6].setAction(LEFT, 8);
 		enemies[3]->patternSteps[7].setAction(ROTATECCW, 180);

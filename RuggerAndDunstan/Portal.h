@@ -13,7 +13,7 @@ namespace portalNS
     const int Y = GAME_HEIGHT/2 - HEIGHT/2;
     const int   TEXTURE_COLS = 6;
     const int   PORTAL_START_FRAME = 0;      // ship1 starts at frame 0
-    const int   PORTAL_END_FRAME = 5;        // ship1 animation frames 0,1,2,3
+    const int   PORTAL_END_FRAME = 0;        // ship1 animation frames 0,1,2,3
     const float PORTAL_ANIMATION_DELAY = 0.2f;    // time between frames
 }
 
@@ -22,6 +22,7 @@ class Portal : public Entity
 private:
 	int goX;
 	int goY;
+	int rotatedThisManyFramesAgo;
 public:
     Portal();
 	Portal(int posx, int posy, int goX, int goY);
