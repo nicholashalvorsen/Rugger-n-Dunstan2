@@ -585,13 +585,6 @@ void Spacewar::update()
 		{
 			enemies[i]->update(frameTime);
 		}
-		//for(int i=0; i<spacewarNS::NUM_WALLS; i++)
-		//{
-		//	wallLong[i].update(frameTime);
-		//	wallLongH[i].update(frameTime);
-		//	wallShort[i].update(frameTime);
-		//	wallShortH[i].update(frameTime);
-		//}
 		for(int i=0; i<walls.size(); i++) walls[i]->update(frameTime);
 		
 		for (int i = 0; i < enemies.size(); i++)
@@ -600,8 +593,15 @@ void Spacewar::update()
 				enemies[i]->update(frameTime);
 		
 			for(int j = 0; j < enemies[i]->bullets.size(); j++)
+			{
 				if(enemies[i]->bullets[j].getActive())
 					enemies[i]->bullets[j].update(frameTime);
+				else
+				{
+					enemies[i]->bullets[j].setX(enemies[i]->getX());
+					enemies[i]->bullets[j].setY(enemies[i]->getY());
+				}
+			}
 		}
 	}
 }
@@ -660,6 +660,9 @@ void Spacewar::collisions()
 		currentRoom++;
 		startRoom(currentRoom);
 	}
+	
+	//-------------------------------------------------------------------------------
+	//	COLLISION WITH PLAYER BULLETS
 
 	for (int i = 0; i < enemies.size(); i++)
 	{
@@ -693,36 +696,77 @@ void Spacewar::collisions()
 		}
 	}
 
-	for(int i=0; i<walls.size(); i++)
-	{
-		for (int e = 0; e < enemies.size(); e++)
-		{
-			for(int j=0; j < enemies[e]->bullets.size(); j++)
-			{
-				if(enemies[e]->bullets[j].collidesWith(*walls[i], collisionVector)) 
-				{
-					enemies[e]->bullets[j].setActiveAndVisible(false);
-				}
+	//-------------------------------------------------------------------------------
+	//	COLLISION WITH ENEMY BULLETS
+	VECTOR2 NOCOLLIDE(-1000, -1000);
+	VECTOR2 pt = NOCOLLIDE;
+	VECTOR2 pt2 = NOCOLLIDE;
+	float minDist;
+	float ruggerDist;
 
-				if (enemies[e]->bullets[j].collidesWith(rugger, collisionVector) && !invincible)
-				{
-					// rugger seen
-					died = true;
-					audio->playCue(ORCHHIT2);
-					enemies[e]->bullets[j].setActiveAndVisible(false);
-				}
+	
+	for (int e = 0; e < enemies.size(); e++)
+	{
+		for(int j=0; j < enemies[e]->bullets.size(); j++)
+		{
+			minDist = 100000;
+
+			VECTOR2 ruggerPt1(rugger.getX(), rugger.getY());
+			VECTOR2 ruggerPt2(rugger.getX() + rugger.getWidth() * rugger.getScale(), rugger.getY() + rugger.getHeight() * rugger.getScale());
+			VECTOR2 ruggerPt1Alt(rugger.getX() + rugger.getWidth() * rugger.getScale(), rugger.getY());
+			VECTOR2 ruggerPt2Alt(rugger.getX(), rugger.getY() + rugger.getHeight() * rugger.getScale());
+			VECTOR2 bulletStart(enemies[e]->getCenterX(), enemies[e]->getCenterY());
+			VECTOR2 bulletEnd = *enemies[e]->bullets[j].getCenter();
+
+			for(int i=0; i<walls.size(); i++)
+			{
+				VECTOR2 wallPt1(walls[i]->getX(), walls[i]->getY()); // top left point of the wall
+				VECTOR2 wallPt2(walls[i]->getX() + walls[i]->getWidth() * walls[i]->getScale(), walls[i]->getY() + walls[i]->getHeight() * walls[i]->getScale()); // bottom right point of the wall 
+				VECTOR2 wallPt1Alt(walls[i]->getX(), walls[i]->getY() + walls[i]->getHeight() * walls[i]->getScale());
+				VECTOR2 wallPt2Alt(walls[i]->getX() + walls[i]->getWidth() * walls[i]->getScale(), walls[i]->getY());
+
+				pt = intersection(bulletStart, bulletEnd, wallPt1, wallPt2);
+				if (		  dist(pt, *enemies[e]->getCenter()) < minDist)
+					minDist = dist(pt, *enemies[e]->getCenter());
+
+				pt = intersection(bulletStart, bulletEnd, wallPt1Alt, wallPt2Alt);
+				if (		  dist(pt, *enemies[e]->getCenter()) < minDist)
+					minDist = dist(pt, *enemies[e]->getCenter());
+			}
+
+			pt = intersection(bulletStart, bulletEnd, ruggerPt1, ruggerPt2);
+			pt2 = intersection(bulletStart, bulletEnd, ruggerPt1Alt, ruggerPt2Alt);
+
+			if (pt != NOCOLLIDE && pt2 != NOCOLLIDE)
+				ruggerDist = min(dist(pt, *enemies[e]->getCenter()), dist(pt2, *enemies[e]->getCenter()));
+			
+			else if (pt == NOCOLLIDE && pt2 != NOCOLLIDE)
+				ruggerDist = dist(pt, *enemies[e]->getCenter());
+				
+			else if (pt != NOCOLLIDE && pt2 == NOCOLLIDE)
+				ruggerDist = dist(pt2, *enemies[e]->getCenter());
+			
+			else if (pt == NOCOLLIDE && pt2 == NOCOLLIDE)
+				ruggerDist = -1;
+
+			if (ruggerDist != -1 && ruggerDist < minDist)
+			{
+				// rugger seen
+				died = true;
+				audio->playCue(ORCHHIT2);
+				enemies[e]->bullets[j].setActiveAndVisible(false);
 			}
 		}
 	}
+
+	//---------------------------------------
 
 	if(rugger.collidesWith(casket, collisionVector))
 	{ 
 		rugger.setX(-1000);
 		timeDone = gameTime;
-		//score = static_cast<int>(score + timebonus);
 		gameOver = true;
 	}
-
 
 }
 
@@ -780,7 +824,7 @@ void Spacewar::render()
 	if (invincible)
 		debugText.print("Invincibility active (press up arrow to toggle)", 10, 100);
 	//debugText.print("up arrow to go to next room", 10, GAME_HEIGHT - 50);
-	//debugText.print("mouse: (" + s3 + ", " + s4 + ")", 300, 10);
+	debugText.print("mouse: (" + s3 + ", " + s4 + ")", 300, 10);
 	//if (died)
 	//	debugText.print("You have been spotted!", 10, GAME_HEIGHT / 2);
 	//if (areAllEnemiesDead())
@@ -829,12 +873,6 @@ void Spacewar::render()
 		else
 			deadMenu.draw();
 	}
-
-    //if(countDownOn)
-    //{
-   //     _snprintf_s(buffer, spacewarNS::BUF_SIZE, "%d", (int)(ceil(countDownTimer)));
-   //     fontBig.print(buffer,spacewarNS::COUNT_DOWN_X,spacewarNS::COUNT_DOWN_Y);
-   // }
 
     graphics->spriteEnd();                  // end drawing sprites
 }
@@ -1175,7 +1213,7 @@ void Spacewar::shootingAI()
 					//enemies[a]->bullets[i].setVisible(true); // uncomment this out to see camera hit detection
 					enemies[a]->bullets[i].setX(enemies[a]->getX());
 					enemies[a]->bullets[i].setY(enemies[a]->getY()+enemy1NS::HEIGHT/2.5);
-					enemies[a]->bullets[i].setVelocity(VECTOR2(temp.x * 3000, temp.y * 3000));
+					enemies[a]->bullets[i].setVelocity(VECTOR2(temp.x * 5000, temp.y * 5000));
 
 					break;
 				}
@@ -1311,4 +1349,39 @@ void Spacewar::getWallPositions()
 	{
 		walls[i]->setActiveAndVisible(true);
 	}
+}
+
+VECTOR2 Spacewar::intersection(VECTOR2 p1, VECTOR2 p2, VECTOR2 p3, VECTOR2 p4)
+{
+	// Store the values for fast access and easy
+	// equations-to-code conversion
+	float x1 = p1.x, x2 = p2.x, x3 = p3.x, x4 = p4.x;
+	float y1 = p1.y, y2 = p2.y, y3 = p3.y, y4 = p4.y;
+ 
+	float d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+	// If d is zero, there is no intersection
+	if (d == 0) return VECTOR2(-1000,-1000);
+ 
+	// Get the x and y
+	float pre = (x1*y2 - y1*x2), post = (x3*y4 - y3*x4);
+	float x = ( pre * (x3 - x4) - (x1 - x2) * post ) / d;
+	float y = ( pre * (y3 - y4) - (y1 - y2) * post ) / d;
+ 
+	// Check if the x and y coordinates are within both lines
+	if ( x < min(x1, x2) || x > max(x1, x2) ||	x < min(x3, x4) || x > max(x3, x4) ) 
+		return VECTOR2(-1000,-1000);
+	if ( y < min(y1, y2) || y > max(y1, y2) ||	y < min(y3, y4) || y > max(y3, y4) ) 
+		return VECTOR2(-1000,-1000);
+ 
+	// Return the point of intersection
+	VECTOR2 ret(x,y);
+	return ret;
+}
+
+float Spacewar::dist(VECTOR2 p1, VECTOR2 p2)
+{
+	float x = abs(p2.x - p1.x);
+	float y = abs(p2.y - p1.y);
+
+	return (sqrt(x * x + y * y));
 }

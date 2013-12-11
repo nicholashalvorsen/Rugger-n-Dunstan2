@@ -54,6 +54,10 @@ void Bullet::draw()
 void Bullet::update(float frameTime)
 {
     Entity::update(frameTime);
+
+	oldX = getCenterX();
+	oldY = getCenterY();
+
     //spriteData.angle += frameTime * bulletNS::ROTATION_RATE;  // rotate the bullet
     spriteData.x += frameTime * velocity.x;         // move bullet along X 
     spriteData.y += frameTime * velocity.y;         // move bullet along Y

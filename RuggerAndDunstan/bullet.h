@@ -29,6 +29,7 @@ namespace bulletNS
 class Bullet : public Entity
 {
 private:
+	float oldX, oldY;
 	
 public:
     // constructor
@@ -39,5 +40,9 @@ public:
     virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
                             TextureManager *textureM);
     void update(float frameTime);
+
+	float getOldX(){return oldX;}
+	float getOldY(){return oldY;}
+	VECTOR2 getOldCenter(){return VECTOR2(getOldX(), getOldY());}
 };
 #endif

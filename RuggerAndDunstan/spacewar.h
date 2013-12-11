@@ -142,6 +142,9 @@ private:
 	bool upDepressedLastFrame;
 	void resetPos();
 	bool gameOver;
+	VECTOR2 intersection(VECTOR2 p1, VECTOR2 p2, VECTOR2 p3, VECTOR2 p4);
+	float dist(VECTOR2 p1, VECTOR2 p2);
+
 
 	string dump, finput;
 	LPCSTR fileName;
