@@ -735,8 +735,9 @@ void Spacewar::collisions()
 			if (ruggerDist != -1 && ruggerDist < minDist && !invincible)
 			{
 				// rugger seen
+				if (!died)
+					audio->playCue(ORCHHIT2);
 				died = true;
-				audio->playCue(ORCHHIT2);
 				enemies[e]->bullets[j].setActiveAndVisible(false);
 			}
 		}
