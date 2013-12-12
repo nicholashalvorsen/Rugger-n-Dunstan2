@@ -157,6 +157,8 @@ private:
 	ofstream fout;
 	vector<Entity*> walls;
 
+	bool longshot;
+
 public:
     // Constructor
     Spacewar();

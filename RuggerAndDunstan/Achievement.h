@@ -29,6 +29,7 @@ namespace achievementNS
 	const int OFFSPEED = 1;		//pixels/frame
 	const int SCREEN_TIME = 6; //seconds assuming 60 frames per second
 	const int JUNK_VALUE = -2897;
+	const int LONGSHOT = 500;
 }
 
 class Achievement : public Entity
@@ -143,7 +144,7 @@ public:
 		movedOff = 0;
 		waited = 0;
 		waitLimit = 64*achievementNS::SCREEN_TIME;
-	}	
+	}
 
 	Achievement(bool* te, bool tr, string imgName) {
 		imageName = imgName;

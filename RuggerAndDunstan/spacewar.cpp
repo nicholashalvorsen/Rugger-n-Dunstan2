@@ -31,6 +31,7 @@ Spacewar::Spacewar()
 	timeDone = 0;
 	timeBonus = -1;
 	inCutscene = -1;
+	longshot = false;
 }
 
 //=============================================================================
@@ -85,7 +86,7 @@ void Spacewar::initialize(HWND hwnd)
 
 	*/
 	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\ManipulationOfSpaceTime.png"));
-
+	achievements.push_back(new Achievement(&longshot, true, "pictures\\Longshot.png")); 
 
 	//_________________________
 	// ----------------------
@@ -698,6 +699,7 @@ void Spacewar::collisions()
 				enemies[i]->setActiveAndVisible(false);
 				pBullets[j].setActiveAndVisible(false);
 				score += bulletDist;
+				if(bulletDist > achievementNS::LONGSHOT) longshot =true;
 				audio->playCue(HITSMACK);
 			}
 		}
