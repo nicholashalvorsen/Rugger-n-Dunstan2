@@ -32,6 +32,9 @@ Spacewar::Spacewar()
 	timeBonus = -1;
 	inCutscene = -1;
 	longshot = false;
+	swiftDeath = false;
+	hasMoved = false;
+	loiter = false;
 }
 
 //=============================================================================
@@ -87,6 +90,10 @@ void Spacewar::initialize(HWND hwnd)
 	*/
 	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\ManipulationOfSpaceTime.png"));
 	achievements.push_back(new Achievement(&longshot, true, "pictures\\Longshot.png")); 
+	achievements.push_back(new Achievement(&swiftDeath, true, "pictures\\Achievement_swift_death.png"));
+	achievements.push_back(new Achievement(&loiter, true, "pictures\\Achievement_idle.png"));
+	achievements.push_back(new Achievement(&hasMoved, true, "pictures\\Achievement_walk.png"));
+
 
 	//_________________________
 	// ----------------------
@@ -453,6 +460,8 @@ void Spacewar::update()
 		//if no direction keys are down
 		if (!input->isKeyDown(RUGGER_DOWN_KEY) && !input->isKeyDown(RUGGER_LEFT_KEY) && !input->isKeyDown(RUGGER_RIGHT_KEY) && !input->isKeyDown(RUGGER_UP_KEY))
 			rugger.rotate(ruggerNS::NONE);
+		else
+			hasMoved = true;
 
 		if (directionX < -1)
 			directionX = -1;
@@ -629,6 +638,17 @@ void Spacewar::update()
 			}
 		}
 	}
+
+
+	//----------------------------------------------------------------------------------
+	//		CHECK ACHIEVEMENTS
+
+	if (died && gameTime < 3)
+		swiftDeath = true;
+
+	if (!hasMoved && gameTime > 15)
+		loiter = true;
+
 }
 
 //=============================================================================

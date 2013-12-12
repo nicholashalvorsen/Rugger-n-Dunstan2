@@ -27,7 +27,7 @@ namespace achievementNS
     const float PORTAL_ANIMATION_DELAY = 0.2f;    
 	const int ONSPEED = 2;
 	const int OFFSPEED = 1;		//pixels/frame
-	const int SCREEN_TIME = 6; //seconds assuming 60 frames per second
+	const int SCREEN_TIME = 10; //seconds assuming 60 frames per second
 	const int JUNK_VALUE = -2897;
 	const int LONGSHOT = 500;
 }

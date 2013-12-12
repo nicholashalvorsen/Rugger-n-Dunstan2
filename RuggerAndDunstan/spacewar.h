@@ -116,6 +116,9 @@ private:
 	int timeDone;
 	int timeBonus;
 	double inCutscene;
+	bool swiftDeath;
+	bool hasMoved;
+	bool loiter;
 
 	TextureManager gravTM;
 	Entity gravBall;
