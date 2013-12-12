@@ -331,6 +331,9 @@ void Spacewar::update()
 	if (input->isKeyDown(VK_BACK))
 		audio->stopCue(BACKGROUND_MUSIC);
 
+	if (input->isKeyDown(VK_ESCAPE))
+		exit(0);
+
     if (menuOn)
     {
 		if (!died)
@@ -824,9 +827,7 @@ void Spacewar::render()
 	if (invincible)
 		debugText.print("Invincibility active (press up arrow to toggle)", 10, 100);
 	//debugText.print("up arrow to go to next room", 10, GAME_HEIGHT - 50);
-	debugText.print("mouse: (" + s3 + ", " + s4 + ")", 300, 10);
-	//if (died)
-	//	debugText.print("You have been spotted!", 10, GAME_HEIGHT / 2);
+	//debugText.print("mouse: (" + s3 + ", " + s4 + ")", 300, 10);
 	//if (areAllEnemiesDead())
 	//	debugText.print("All the enemies are gone!", 10, GAME_HEIGHT / 2 + 20);
 
