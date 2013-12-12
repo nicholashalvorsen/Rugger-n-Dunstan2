@@ -35,6 +35,7 @@ Spacewar::Spacewar()
 	swiftDeath = false;
 	hasMoved = false;
 	loiter = false;
+	hPressed = false;
 }
 
 //=============================================================================
@@ -93,6 +94,7 @@ void Spacewar::initialize(HWND hwnd)
 	achievements.push_back(new Achievement(&swiftDeath, true, "pictures\\Achievement_swift_death.png"));
 	achievements.push_back(new Achievement(&loiter, true, "pictures\\Achievement_idle.png"));
 	achievements.push_back(new Achievement(&hasMoved, true, "pictures\\Achievement_walk.png"));
+	achievements.push_back(new Achievement(&hPressed, true, "pictures\\Achievement_h.png"));
 
 
 	//_________________________
@@ -648,6 +650,9 @@ void Spacewar::update()
 
 	if (!hasMoved && gameTime > 15)
 		loiter = true;
+
+	if (input->isKeyDown('H'))
+		hPressed = true;
 
 }
 

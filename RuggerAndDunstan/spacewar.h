@@ -119,6 +119,7 @@ private:
 	bool swiftDeath;
 	bool hasMoved;
 	bool loiter;
+	bool hPressed;
 
 	TextureManager gravTM;
 	Entity gravBall;
