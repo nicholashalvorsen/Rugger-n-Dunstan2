@@ -65,6 +65,10 @@ void Spacewar::initialize(HWND hwnd)
 	//_________________________
 	// ----------------------
 	// initialize achievements
+	//const int GREATER_THAN = 1;
+	//const int LESS_THAN = -1;
+	//const int EQUAL_TO = 0; -- These are in constants.h
+
 	//To create an achievement, push a new Achievement back into the achievements vector. That's it.
 	/* Constructor explanation:
 
@@ -72,10 +76,11 @@ void Spacewar::initialize(HWND hwnd)
 		rugger placed a grav ball. So the first time rugger.graving is TRUE (second parameter), the achievement is activated.
 
 		Constructor overloads:
-		You can test to see if an integer is equal to a certain value. (Example: Achievement(&rugger.deaths, 5, "pictures\\BeMoreCareful.png");
-		You can test to see if an integer variable is ever equal to another integer variable	(example: Achievement(&rugger.deaths, &rugger.camerasKilled, "pictures\\YouDieMoreThanYouKill");
+		You can test to see if an integer is over a certain value. (Example: Achievement(&rugger.deaths, GREATER_THAN, 5, "pictures\\BeMoreCareful.png");
+		You can test to see if an integer variable is ever equal to another integer variable	(example: Achievement(&rugger.deaths, EQUAL_TO, &rugger.camerasKilled, "pictures\\YouDieMoreThanYouKill");
 		You can test to see if a boolean variable is equal to some other boolean variable.
-		Just make sure the first parameter is a variable and not a literal, and the second parameter can be either a variable or a literal. (only works with ints and bools)
+		
+		
 
 	*/
 	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\ManipulationOfSpaceTime.png"));
