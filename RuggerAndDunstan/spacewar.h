@@ -114,6 +114,7 @@ private:
 	double gameTime;
 	bool invincible;
 	int timeDone;
+	int timeBonus;
 	double inCutscene;
 
 	TextureManager gravTM;

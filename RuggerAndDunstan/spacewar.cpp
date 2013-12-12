@@ -29,6 +29,7 @@ Spacewar::Spacewar()
 	gameOver = false;
 	invincible = false;
 	timeDone = 0;
+	timeBonus = -1;
 	inCutscene = -1;
 }
 
@@ -844,7 +845,7 @@ void Spacewar::render()
 	ss >> s1 >> s2 >> s3 >> s4 >> s5;
 	
 	debugText.print("Time: " + s5, 10, 10); 
-	debugText.print("Score: " + s1, 10, 30);
+	debugText.print("Total bullet hit distance: " + s1, 10, 30);
 	if (invincible)
 		debugText.print("Invincibility active (press up arrow to toggle)", 10, 100);
 	//debugText.print("up arrow to go to next room", 10, GAME_HEIGHT - 50);
@@ -876,19 +877,23 @@ void Spacewar::render()
 		if (!died)
 		{
 			if(gameOver) {
+				
+				if (timeBonus == -1)
+				{
+					timeBonus = 500 - (gameTime * 2);
 
-				int timebonus = 500 - (gameTime * 2);
-				if (timebonus < 0)
-					timebonus = 0;
+					if (timeBonus < 0)
+						timeBonus = 0;
+				}
 
 				gameOverBackground.draw();
 				ss.clear();
 				string s1, s2, s3;
-				ss << score << ' ' << timebonus << ' ' << score + timebonus;
+				ss << score << ' ' << timeBonus << ' ' << score + timeBonus;
 				ss >> s1    >> s2        >> s3;
-				fontScore.print("Base score: " + s1, GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 60);
-				fontScore.print("Time bonus: " + s2, GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 30);
-				fontScore.print("Total score: " + s3, GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2);
+				fontScore.print("Total bullet hit distance: " + s1, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 - 60);
+				fontScore.print("Time bonus: " + s2, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 - 25);
+				fontScore.print("Total score: " + s3, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 + 30);
 			}
 			else menu.draw();
 		}
