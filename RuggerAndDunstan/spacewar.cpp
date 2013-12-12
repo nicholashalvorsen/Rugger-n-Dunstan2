@@ -65,7 +65,20 @@ void Spacewar::initialize(HWND hwnd)
 	//_________________________
 	// ----------------------
 	// initialize achievements
-	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\testAchievement.png"));
+	//To create an achievement, push a new Achievement back into the achievements vector. That's it.
+	/* Constructor explanation:
+
+		First parameter is the variable that is being tested to make the achievement happen. For example, the first one tests to see that
+		rugger placed a grav ball. So the first time rugger.graving is TRUE (second parameter), the achievement is activated.
+
+		Constructor overloads:
+		You can test to see if an integer is equal to a certain value. (Example: Achievement(&rugger.deaths, 5, "pictures\\BeMoreCareful.png");
+		You can test to see if an integer variable is ever equal to another integer variable	(example: Achievement(&rugger.deaths, &rugger.camerasKilled, "pictures\\YouDieMoreThanYouKill");
+		You can test to see if a boolean variable is equal to some other boolean variable.
+		Just make sure the first parameter is a variable and not a literal, and the second parameter can be either a variable or a literal. (only works with ints and bools)
+
+	*/
+	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\ManipulationOfSpaceTime.png"));
 
 
 	//_________________________
@@ -316,8 +329,11 @@ void Spacewar::initialize(HWND hwnd)
 	audio->stopCue(BACKGROUND_MUSIC);
 	audio->playCue(BACKGROUND_MUSIC);
 
-	for (int i = 0; i < achievements.size(); i++)
+	for (int i = 0; i < achievements.size(); i++) {
 		achievements[i]->setVisibleAndActive(true); //This doesn't do anything :)
+		achievements[i]->setVisible(true);
+		achievements[i]->setActive(true);
+	}
 
 	startRoom(currentRoom);
     return;
@@ -877,6 +893,7 @@ void Spacewar::render()
 
 
 	for (int i = 0; i < achievements.size(); i++) {
+		achievements[i]->draw();
 		if (achievements[i]->hasHappened())
 			if (!achievements[i]->alreadyDid())
 				achievements[i]->doAchievement();

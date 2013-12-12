@@ -16,8 +16,8 @@ using std::vector;
 
 namespace achievementNS
 {
-    const int WIDTH = 314;                   
-	const int HEIGHT = 72;
+    const int WIDTH = 300;                   
+	const int HEIGHT = 64;
 	const int IMAGE_HEIGHT = HEIGHT;
     const int X = 0;   
     const int Y = -HEIGHT;
@@ -25,9 +25,9 @@ namespace achievementNS
     const int   PORTAL_START_FRAME = 0;      
     const int   PORTAL_END_FRAME = 0;        
     const float PORTAL_ANIMATION_DELAY = 0.2f;    
-	const int ONSPEED = 1;
+	const int ONSPEED = 2;
 	const int OFFSPEED = 1;		//pixels/frame
-	const int SCREEN_TIME = 3; //seconds assuming 60 frames per second
+	const int SCREEN_TIME = 6; //seconds assuming 60 frames per second
 	const int JUNK_VALUE = -2897;
 }
 
@@ -229,22 +229,22 @@ public:
 	void testHappened() {
 		if (comparator != achievementNS::JUNK_VALUE) {
 			if (condition == GREATER_THAN) 
-				happened = (*value>comparator);
+				if (*value>comparator) happened = true;
 			else if (condition == LESS_THAN) 
-				happened = (*value<comparator);
+				if (*value<comparator) happened = true;
 			else if (condition == EQUAL_TO) 
-				happened = (*value==comparator);
+				if (*value==comparator) happened = true;
 		}else if (variableComparator != NULL) {
 			if (condition == GREATER_THAN) 
-				happened = (*value>*variableComparator);
+				if (*value>*variableComparator) happened = true;
 			else if (condition == LESS_THAN) 
-				happened = (*value<*variableComparator);
+				if (*value<*variableComparator) happened = true;
 			else if (condition == EQUAL_TO) 
-				happened = (*value==*variableComparator);
+				if (*value==*variableComparator) happened = true;
 		}else if (tester != achievementNS::JUNK_VALUE) {
-			happened = (*testee == tester);
+			if (*testee == tester) happened = true;
 		}else if (variableTester != NULL) {
-			happened = (*testee == *variableTester);
+			if (*testee == *variableTester) happened = true;
 		}
 	}
 
@@ -262,7 +262,7 @@ public:
 					movedOn+=achievementNS::ONSPEED;
 				} else if (waited < waitLimit) {
 					waited++;
-				} else if (movedOff < moveLimit) {
+				} else if (movedOff < moveLimit+10) {
 					this->setY(this->getY()-achievementNS::OFFSPEED);
 					movedOff+=achievementNS::OFFSPEED;
 				} 
@@ -273,7 +273,7 @@ public:
 					movedOn+=achievementNS::ONSPEED;
 				} else if (waited < waitLimit) {
 					waited++;
-				} else if (movedOff < moveLimit) {
+				} else if (movedOff < moveLimit+10) {
 					this->setX(this->getX()+achievementNS::OFFSPEED);
 					movedOff+=achievementNS::OFFSPEED;
 				}
@@ -283,7 +283,7 @@ public:
 					movedOn+=achievementNS::ONSPEED;
 				} else if (waited < waitLimit) {
 					waited++;
-				} else if (movedOff < moveLimit) {
+				} else if (movedOff < moveLimit+10) {
 					this->setY(this->getY()+achievementNS::OFFSPEED);
 					movedOff+=achievementNS::OFFSPEED;
 				}
@@ -293,7 +293,7 @@ public:
 					movedOn+=achievementNS::ONSPEED;
 				} else if (waited < waitLimit) {
 					waited++;
-				} else if (movedOff < moveLimit) {
+				} else if (movedOff < moveLimit+10) {
 					this->setX(this->getX()-achievementNS::OFFSPEED);
 					movedOff+=achievementNS::OFFSPEED;
 				}
