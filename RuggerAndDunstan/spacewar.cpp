@@ -862,7 +862,7 @@ void Spacewar::render()
 		{
 			if(gameOver) {
 
-				int timebonus = 500 - (gameTime * 10);
+				int timebonus = 500 - (gameTime * 5);
 				if (timebonus < 0)
 					timebonus = 0;
 
