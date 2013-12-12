@@ -19,6 +19,7 @@
 #include "Portal.h"
 #include "bullet.h"
 #include "enemy.h"
+#include "Achievement.h"
 #include <sstream>
 #include <ctime>
 #include <fstream>
@@ -107,6 +108,7 @@ private:
     float   roundTimer;         // time until new round starts
 	vector<Enemy1*> enemies;
 	vector<Portal*> portals;
+	vector<Achievement*> achievements;
 	Bullet bullet;
 	double bulletDist;
 	double gameTime;

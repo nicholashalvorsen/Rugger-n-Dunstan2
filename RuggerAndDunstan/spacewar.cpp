@@ -61,9 +61,22 @@ void Spacewar::initialize(HWND hwnd)
     fontScore.initialize(graphics, spacewarNS::FONT_SCORE_SIZE, false, false, spacewarNS::FONT);
     debugText.initialize(graphics, 24, true, false, "Segoe UI");
 
+
+	//_________________________
+	// ----------------------
+	// initialize achievements
+	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\testAchievement.png"));
+
+
 	//_________________________
 	// ----------------------
 	// initialize textures
+
+	//achievements
+	for (int i = 0; i < achievements.size(); i++) {
+		if (!achievements[i]->getTexture()->initialize(graphics, achievements[i]->getImageName()))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing achievement "));
+	}
 
     // rugger texture
     if (!ruggerTexture.initialize(graphics,RUGGER_IMAGE))
@@ -273,11 +286,15 @@ void Spacewar::initialize(HWND hwnd)
 	}
 
 	for (int i = 0; i < spacewarNS::ROOM3PORT_NUM; i++) {
-		if(!room3Port[i].initialize(this, enemy1NS::WIDTH, enemy1NS::HEIGHT, enemy1NS::TEXTURE_COLS, &portTexture))
+		if(!room3Port[i].initialize(this, portalNS::WIDTH, portalNS::HEIGHT, portalNS::TEXTURE_COLS, &portTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing room 3 portals"));
 		room3Port[i].setActiveAndVisible(false);
 	}
 
+	for (int i = 0; i < achievements.size(); i++) {
+		if (!achievements[i]->initialize(this, achievementNS::WIDTH, achievementNS::HEIGHT, achievementNS::TEXTURE_COLS, achievements[i]->getTexture()))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing achievements"));
+	}
 
 	for(int i=0; i<ruggerNS::NUM_BULLETS; i++)
 	{
@@ -625,7 +642,7 @@ void Spacewar::collisions()
 {
 	VECTOR2 collisionVector;
 	rugger.setCanBeSeen(false);
-
+	
 	if (trapDoor.getActive() && rugger.collidesWith(trapDoor, collisionVector))
 	{
 		audio->playCue(WOH);
@@ -768,6 +785,10 @@ void Spacewar::render()
 {
     graphics->spriteBegin();                // begin drawing sprites
 	
+	for (int i = 0; i < achievements.size(); i++) {
+		achievements[i]->testHappened();
+	}
+
 	switch(currentRoom)
 	{
 	case 0: background.draw(); break;
@@ -859,6 +880,15 @@ void Spacewar::render()
 		else
 			deadMenu.draw();
 	}
+
+
+	for (int i = 0; i < achievements.size(); i++) {
+		if (achievements[i]->hasHappened())
+			if (!achievements[i]->alreadyDid())
+				achievements[i]->doAchievement();
+	}
+
+
 
     graphics->spriteEnd();                  // end drawing sprites
 }

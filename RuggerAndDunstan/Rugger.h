@@ -124,6 +124,7 @@ public:
 	bool getGraving() {return graving;}
 	void setFiring(bool b) {firing =b;}
 	void setGraving(bool b) {graving = b;}
+	bool	graving;
 
 private:
     float   oldX, oldY, oldAngle;
@@ -140,7 +141,7 @@ private:
 	float	timeSinceLastShot;
 	bool    canBeSeen;
 	bool    firing;
-	bool	graving;
+	
 
 };
 #endif

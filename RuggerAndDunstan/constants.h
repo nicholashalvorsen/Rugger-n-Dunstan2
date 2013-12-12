@@ -29,6 +29,12 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const float FULL_HEALTH = 100;
 const int MAX_PATTERN_STEPS = 20;
 
+//MISC
+const int GREATER_THAN = 1;
+const int LESS_THAN = -1;
+const int EQUAL_TO = 0;
+
+
 // graphic images
 const char MENU_IMAGE[] =        "pictures\\title.png";
 const char MENU_DEAD_IMAGE[] =   "pictures\\deadmenu.png";
