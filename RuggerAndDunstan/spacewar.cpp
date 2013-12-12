@@ -316,15 +316,8 @@ void Spacewar::initialize(HWND hwnd)
 	audio->stopCue(BACKGROUND_MUSIC);
 	audio->playCue(BACKGROUND_MUSIC);
 
-	/*********************************************************************/
-	//dump.clear();
-	//fileName = "input.txt";
-	//hFile = CreateFile(fileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-	//if(hFile == INVALID_HANDLE_VALUE) throw(GameError(gameErrorNS::FATAL_ERROR, "Error opening file for reading."));
-	//
-	//DWORD c;
-	//ReadFile(hFile, &dump, 64, &c, nullptr);
-	/*********************************************************************/
+	for (int i = 0; i < achievements.size(); i++)
+		achievements[i]->setVisibleAndActive(true); //This doesn't do anything :)
 
 	startRoom(currentRoom);
     return;
