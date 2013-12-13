@@ -162,6 +162,7 @@ private:
 	vector<Entity*> walls;
 
 	bool longshot;
+	int intGameTime;
 
 public:
     // Constructor

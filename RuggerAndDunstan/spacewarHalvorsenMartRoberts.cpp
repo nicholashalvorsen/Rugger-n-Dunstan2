@@ -17,6 +17,7 @@ Spacewar::Spacewar()
     initialized = false;
 	srand(time(0));
 	gameTime = 0;
+	intGameTime = 0;
 	menuActive = false;
 	atMainMenu = true;
 	currentRoom = 0;
@@ -103,7 +104,12 @@ void Spacewar::initialize(HWND hwnd)
 	achievements.push_back(new Achievement(&(rugger.spottedAchievement), true, "pictures\\stealthMaster.png"));
 	achievements.push_back(new Achievement(&(rugger.messingAround), true, "pictures\\messingAround.png"));
 	achievements.push_back(new Achievement(&invincible, true, "pictures\\cheater.png"));
-
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 15, "pictures\\survivor1.png"));
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 30, "pictures\\survivor2.png"));
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 50, "pictures\\survivor3.png"));
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 80, "pictures\\survivor4.png"));
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 100, "pictures\\survivor5.png"));
+	achievements.push_back(new Achievement(&intGameTime, GREATER_THAN, 150, "pictures\\survivor6.png"));
 
 	//_________________________
 	// ----------------------
@@ -368,6 +374,7 @@ void Spacewar::initialize(HWND hwnd)
 //=============================================================================
 void Spacewar::update()
 {
+	intGameTime = static_cast<int>(gameTime/3);
 	if (input->isKeyDown(VK_BACK))
 		audio->stopCue(BACKGROUND_MUSIC);
 
@@ -675,9 +682,9 @@ void Spacewar::update()
 	if (input->isKeyDown('H'))
 		hPressed = true;
 
-	if (gameOver && gameTime < 45)
+	if (gameOver && gameTime/3 < 45)
 		speedRun = true;
-	else if (gameOver && gameTime < 50)
+	else if (gameOver && gameTime/3 < 50)
 		moderatelyFastRun = true;
 
 	if (gameOver && rugger.spots == 0)
