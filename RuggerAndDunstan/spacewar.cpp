@@ -95,7 +95,7 @@ void Spacewar::initialize(HWND hwnd)
 	achievements.push_back(new Achievement(&loiter, true, "pictures\\Achievement_idle.png"));
 	achievements.push_back(new Achievement(&hasMoved, true, "pictures\\Achievement_walk.png"));
 	achievements.push_back(new Achievement(&hPressed, true, "pictures\\Achievement_h.png"));
-
+	//achievements.push_back(new Achievement());
 
 	//_________________________
 	// ----------------------
