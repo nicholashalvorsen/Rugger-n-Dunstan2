@@ -37,6 +37,10 @@ Rugger::Rugger() : Entity()
     mass = ruggerNS::MASS;
 	timeSinceLastShot = 0.0;
 	canBeSeen = false;
+	vandalized = false;
+	spottedAchievement = false;
+	spots = 0;
+	messingAround = false;
 }
 
 //=============================================================================

@@ -36,6 +36,9 @@ Spacewar::Spacewar()
 	hasMoved = false;
 	loiter = false;
 	hPressed = false;
+	speedRun = false;
+	moderatelyFastRun = false;
+	achievementBonus = 0;
 }
 
 //=============================================================================
@@ -85,9 +88,6 @@ void Spacewar::initialize(HWND hwnd)
 		You can test to see if an integer is over a certain value. (Example: Achievement(&rugger.deaths, GREATER_THAN, 5, "pictures\\BeMoreCareful.png");
 		You can test to see if an integer variable is ever equal to another integer variable	(example: Achievement(&rugger.deaths, EQUAL_TO, &rugger.camerasKilled, "pictures\\YouDieMoreThanYouKill");
 		You can test to see if a boolean variable is equal to some other boolean variable.
-		
-		
-
 	*/
 	achievements.push_back(new Achievement(&rugger.graving, true, "pictures\\ManipulationOfSpaceTime.png"));
 	achievements.push_back(new Achievement(&longshot, true, "pictures\\Longshot.png")); 
@@ -95,7 +95,15 @@ void Spacewar::initialize(HWND hwnd)
 	achievements.push_back(new Achievement(&loiter, true, "pictures\\Achievement_idle.png"));
 	achievements.push_back(new Achievement(&hasMoved, true, "pictures\\Achievement_walk.png"));
 	achievements.push_back(new Achievement(&hPressed, true, "pictures\\Achievement_h.png"));
-	//achievements.push_back(new Achievement());
+	achievements.push_back(new Achievement(&rugger.vandalized, true, "pictures\\BabysFirstVandalism.png"));
+	achievements.push_back(new Achievement(&rugger.spots, GREATER_THAN, 3, "pictures\\beMoreStealthy.png"));
+	achievements.push_back(new Achievement(&rugger.spots, GREATER_THAN, 6, "pictures\\wayMoreStealthy.png"));
+	achievements.push_back(new Achievement(&speedRun, true, "pictures\\speedRun.png"));
+	achievements.push_back(new Achievement(&moderatelyFastRun, true, "pictures\\moderatelyFastRun.png"));
+	achievements.push_back(new Achievement(&(rugger.spottedAchievement), true, "pictures\\stealthMaster.png"));
+	achievements.push_back(new Achievement(&(rugger.messingAround), true, "pictures\\messingAround.png"));
+	achievements.push_back(new Achievement(&invincible, true, "pictures\\cheater.png"));
+
 
 	//_________________________
 	// ----------------------
@@ -516,6 +524,9 @@ void Spacewar::update()
 			gravBall.setY(input->getMouseY() - planetNS::HEIGHT*gravBall.getScale()/2.0);
 		}
 
+		if (rugger.getFiring() && rugger.getGraving())
+			rugger.messingAround = true;
+
 		if (!input->getMouseLButton() && !input->getMouseRButton()) {
 			rugger.setFiring(false);
 			rugger.setGraving(false);
@@ -641,7 +652,17 @@ void Spacewar::update()
 		}
 	}
 
-
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//----------------------------------------------------------------------------------
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//----------------------------------------------------------------------------------
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//----------------------------------------------------------------------------------
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//----------------------------------------------------------------------------------
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//----------------------------------------------------------------------------------
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//----------------------------------------------------------------------------------
 	//		CHECK ACHIEVEMENTS
 
@@ -653,6 +674,14 @@ void Spacewar::update()
 
 	if (input->isKeyDown('H'))
 		hPressed = true;
+
+	if (gameOver && gameTime < 45)
+		speedRun = true;
+	else if (gameOver && gameTime < 50)
+		moderatelyFastRun = true;
+
+	if (gameOver && rugger.spots == 0)
+		rugger.spottedAchievement = true;
 
 }
 
@@ -721,6 +750,7 @@ void Spacewar::collisions()
 		{
 			if(enemies[i]->collidesWith(pBullets[j], collisionVector))
 			{
+				rugger.vandalized = true;
 				enemies[i]->setActiveAndVisible(false);
 				pBullets[j].setActiveAndVisible(false);
 				score += bulletDist;
@@ -804,10 +834,13 @@ void Spacewar::collisions()
 			if (ruggerDist != -1 && ruggerDist < minDist && !invincible)
 			{
 				// rugger seen
-				if (!died)
+				if (!died) {
 					audio->playCue(ORCHHIT2);
-				died = true;
-				enemies[e]->bullets[j].setActiveAndVisible(false);
+					died = true;
+					rugger.spots++;
+					score -= (40*rugger.spots);
+					enemies[e]->bullets[j].setActiveAndVisible(false);
+				}
 			}
 		}
 	}
@@ -819,6 +852,12 @@ void Spacewar::collisions()
 		rugger.setX(-1000);
 		timeDone = gameTime;
 		gameOver = true;
+
+		for (int i = 0; i < achievements.size(); i++) {
+			if (achievements[i]->getDone()) 
+				achievementBonus+=20;
+		}
+
 	}
 
 }
@@ -870,7 +909,7 @@ void Spacewar::render()
 	string s1, s2, s3, s4, s5, s6, s7, s8;
 	ss << score << ' ' << currentRoom << ' ' << input->getMouseX() << ' ' << input->getMouseY() << ' ' << static_cast<int>(gameTime/3) << ' ';
 	ss >> s1 >> s2 >> s3 >> s4 >> s5;
-	
+
 	debugText.print("Time: " + s5, 10, 10); 
 	debugText.print("Total bullet hit distance: " + s1, 10, 30);
 	if (invincible)
@@ -918,9 +957,16 @@ void Spacewar::render()
 				string s1, s2, s3;
 				ss << score << ' ' << timeBonus << ' ' << score + timeBonus;
 				ss >> s1    >> s2        >> s3;
+				
+				ss.clear();
+				string countString;
+				ss << achievementBonus;
+				ss >> countString;
+
 				fontScore.print("Total bullet hit distance: " + s1, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 - 60);
 				fontScore.print("Time bonus: " + s2, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 - 25);
-				fontScore.print("Total score: " + s3, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 + 30);
+				fontScore.print("Achievement bonus: " + countString, GAME_WIDTH/2-150, GAME_HEIGHT/2 + 10);
+				fontScore.print("Total score: " + s3, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 + 45);
 			}
 			else menu.draw();
 		}

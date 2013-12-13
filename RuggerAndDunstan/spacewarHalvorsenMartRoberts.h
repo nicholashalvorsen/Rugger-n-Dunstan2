@@ -186,6 +186,10 @@ public:
 	void playCutscene(int num);
 	void stopCutscene();
 	void getWallPositions();
+
+	bool speedRun;
+	bool moderatelyFastRun;
+	int achievementBonus;
 };
 
 #endif

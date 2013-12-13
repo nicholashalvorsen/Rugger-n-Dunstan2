@@ -53,7 +53,10 @@ class Rugger : public Entity
 public:
     // constructor
     Rugger();
-
+	bool vandalized;
+	bool spottedAchievement;
+	int spots;
+	bool messingAround;
     // inherited member functions
     virtual void draw();
     virtual bool initialize(Game *gamePtr, int width, int height, int ncols,

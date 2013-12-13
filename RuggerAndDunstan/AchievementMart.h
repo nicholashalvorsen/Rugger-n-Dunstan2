@@ -227,7 +227,9 @@ public:
 
 	bool hasHappened() {return happened;}
 
-	void testHappened() {
+	bool getDone() {return done;}
+
+	bool testHappened() {
 		if (comparator != achievementNS::JUNK_VALUE) {
 			if (condition == GREATER_THAN) 
 				if (*value>comparator) happened = true;
@@ -247,6 +249,7 @@ public:
 		}else if (variableTester != NULL) {
 			if (*testee == *variableTester) happened = true;
 		}
+		return happened;
 	}
 
 	bool alreadyDid() {return done;}
