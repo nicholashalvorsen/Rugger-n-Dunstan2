@@ -55,6 +55,7 @@ private:
 	int moveLimit;
 	int waited;
 	int waitLimit;
+	bool playedSound;
 
 public:
 	//bullet travel distance
@@ -70,6 +71,8 @@ public:
 		imageName = imgName;
 		happened = false;
 		done = false;
+
+		playedSound = false;
 
 		value = v;
 		condition = con;
@@ -116,7 +119,7 @@ public:
 		comparator = achievementNS::JUNK_VALUE;
 		testee = NULL;
 		tester = achievementNS::JUNK_VALUE;
-
+		playedSound = false;
 		variableTester = NULL;
 		variableComparator = NULL;
 
@@ -159,7 +162,7 @@ public:
 
 		variableTester = NULL;
 		variableComparator = NULL;
-
+		playedSound = false;
 		int place = rand()%4;
 		if (place==0) {
 			this->setX(rand()%(GAME_WIDTH-achievementNS::WIDTH));
@@ -196,7 +199,7 @@ public:
 		comparator = achievementNS::JUNK_VALUE;
 		testee = te;
 		tester = achievementNS::JUNK_VALUE;
-
+		playedSound = false;
 		variableTester = tr;
 		variableComparator = NULL;
 
@@ -255,7 +258,11 @@ public:
 	bool alreadyDid() {return done;}
 
 	void doAchievement() {
-		
+		if (!playedSound) {
+			audio->playCue(CHING);
+			playedSound = true;
+		}
+
 		if (movedOff == moveLimit)
 			done = true;
 

@@ -918,13 +918,9 @@ void Spacewar::render()
 	ss >> s1 >> s2 >> s3 >> s4 >> s5;
 
 	debugText.print("Time: " + s5, 10, 10); 
-	debugText.print("Total bullet hit distance: " + s1, 10, 30);
+	debugText.print("Score: " + s1, 10, 30);
 	if (invincible)
 		debugText.print("Invincibility active (press up arrow to toggle)", 10, 100);
-	//debugText.print("up arrow to go to next room", 10, GAME_HEIGHT - 50);
-	//debugText.print("mouse: (" + s3 + ", " + s4 + ")", 300, 10);
-	//if (areAllEnemiesDead())
-	//	debugText.print("All the enemies are gone!", 10, GAME_HEIGHT / 2 + 20);
 
 	
 	if (bulletDist > 0)

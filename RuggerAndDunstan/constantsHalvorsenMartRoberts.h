@@ -110,6 +110,7 @@ const char PLINK[]			= "plink";
 const char HITSMACK[]		= "hitsmack";
 const char WOH[]			= "woh";
 const char PORT[]			= "port";
+const char CHING[]			= "ching";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used
