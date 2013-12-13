@@ -88,24 +88,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
-    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="bulletHalvorsen.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="dashboard.cpp" />
-    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemyHalvorsenRoberts.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="inputDialog.cpp" />
-    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="menuHalvorsen.cpp" />
     <ClCompile Include="messageDialog.cpp" />
-    <ClCompile Include="patternStep.cpp" />
-    <ClCompile Include="Portal.cpp" />
-    <ClCompile Include="Rugger.cpp" />
-    <ClCompile Include="spacewar.cpp" />
+    <ClCompile Include="patternStepHalvorsen.cpp" />
+    <ClCompile Include="PortalMart.cpp" />
+    <ClCompile Include="RuggerHalvorsenMartRoberts.cpp" />
+    <ClCompile Include="spacewarHalvorsenMartRoberts.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="planet.cpp" />
-    <ClCompile Include="ship.cpp" />
+    <ClCompile Include="shipHalvorsenRoberts.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="torpedo.cpp" />
@@ -113,32 +113,32 @@
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Achievement.h" />
+    <ClInclude Include="AchievementMart.h" />
     <ClInclude Include="audio.h" />
-    <ClInclude Include="bullet.h" />
+    <ClInclude Include="bulletHalvorsen.h" />
     <ClInclude Include="console.h" />
-    <ClInclude Include="constants.h" />
+    <ClInclude Include="constantsHalvorsenMartRoberts.h" />
     <ClInclude Include="dashboard.h" />
-    <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemyHalvorsenRoberts.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gameError.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="inputDialog.h" />
-    <ClInclude Include="menu.h" />
+    <ClInclude Include="menuHalvorsen.h" />
     <ClInclude Include="messageDialog.h" />
-    <ClInclude Include="patternStep.h" />
-    <ClInclude Include="portal.h" />
-    <ClInclude Include="Rugger.h" />
-    <ClInclude Include="spacewar.h" />
+    <ClInclude Include="patternStepHalvorsen.h" />
+    <ClInclude Include="portalMart.h" />
+    <ClInclude Include="RuggerHalvorsenMartRoberts.h" />
+    <ClInclude Include="spacewarHalvorsenMartRoberts.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="planet.h" />
-    <ClInclude Include="ship.h" />
+    <ClInclude Include="shipHalvorsenRoberts.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="torpedo.h" />
-    <ClInclude Include="vision.h" />
+    <ClInclude Include="visionHalvorsen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

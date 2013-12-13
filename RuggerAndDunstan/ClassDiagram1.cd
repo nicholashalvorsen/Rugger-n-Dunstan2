@@ -244,7 +244,7 @@
     </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAQCAiAogABC4OQIAAAAgCIRAAAAAAAAAQEAEA=</HashCode>
-      <FileName>ship.h</FileName>
+      <FileName>shipHalvorsenRoberts.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Torpedo" Collapsed="true">

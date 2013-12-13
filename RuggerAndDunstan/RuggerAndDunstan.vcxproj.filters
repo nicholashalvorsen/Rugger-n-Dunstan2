@@ -30,9 +30,6 @@
     <ClCompile Include="planet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ship.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,35 +60,35 @@
     <ClCompile Include="inputDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="spacewar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rugger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="patternStep.cpp">
+    <ClCompile Include="bulletHalvorsen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Portal.cpp">
+    <ClCompile Include="enemyHalvorsenRoberts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menuHalvorsen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patternStepHalvorsen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PortalMart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuggerHalvorsenMartRoberts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shipHalvorsenRoberts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spacewarHalvorsenMartRoberts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="planet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
@@ -140,31 +134,37 @@
     <ClInclude Include="inputDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="spacewar.h">
+    <ClInclude Include="AchievementMart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rugger.h">
+    <ClInclude Include="bulletHalvorsen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
+    <ClInclude Include="constantsHalvorsenMartRoberts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
+    <ClInclude Include="enemyHalvorsenRoberts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.h">
+    <ClInclude Include="menuHalvorsen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vision.h">
+    <ClInclude Include="patternStepHalvorsen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="patternStep.h">
+    <ClInclude Include="portalMart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="portal.h">
+    <ClInclude Include="RuggerHalvorsenMartRoberts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Achievement.h">
+    <ClInclude Include="shipHalvorsenRoberts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spacewarHalvorsenMartRoberts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="visionHalvorsen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

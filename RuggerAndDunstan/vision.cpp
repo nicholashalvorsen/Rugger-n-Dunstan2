@@ -3,8 +3,8 @@
 // Charles Kelly
 // Chapter 6 ship.cpp v1.0
 
-#include "vision.h"
-#include "bullet.h"
+#include "visionHalvorsen.h"
+#include "bulletHalvorsen.h"
 
 //=============================================================================
 // default constructor

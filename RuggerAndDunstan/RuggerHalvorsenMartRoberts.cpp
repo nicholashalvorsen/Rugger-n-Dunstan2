@@ -3,7 +3,7 @@
 // Charles Kelly
 // rugger.cpp v1.0
 
-#include "Rugger.h"
+#include "RuggerHalvorsenMartRoberts.h"
 
 //=============================================================================
 // default constructor

@@ -11,7 +11,7 @@ class Console;
 
 #include <string>
 #include <deque>
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "textDX.h"
 #include "graphics.h"
 #include "input.h"

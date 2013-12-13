@@ -15,7 +15,7 @@ class Game;
 #include "input.h"
 #include "audio.h"
 #include "entity.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "textDX.h"
 #include "console.h"
 #include "gameError.h"

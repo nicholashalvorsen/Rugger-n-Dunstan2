@@ -3,7 +3,7 @@
 // Charles Kelly
 // ship.cpp v1.0
 
-#include "ship.h"
+#include "shipHalvorsenRoberts.h"
 
 //=============================================================================
 // default constructor

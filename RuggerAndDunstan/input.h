@@ -14,7 +14,7 @@ class Input;
 #include <WindowsX.h>
 #include <string>
 #include <XInput.h>
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "gameError.h"
 
 

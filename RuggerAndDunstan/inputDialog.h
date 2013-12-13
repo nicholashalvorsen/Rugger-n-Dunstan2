@@ -10,7 +10,7 @@
 class InputDialog;
 
 #include <string>
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "textDX.h"
 #include "graphics.h"
 #include "input.h"

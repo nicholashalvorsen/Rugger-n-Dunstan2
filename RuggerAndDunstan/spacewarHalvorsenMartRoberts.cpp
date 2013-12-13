@@ -4,7 +4,7 @@
 // spacewar.cpp v1.1
 // This class is the core of the game
 
-#include "spaceWar.h"
+#include "spaceWarHalvorsenMartRoberts.h"
 
 //=============================================================================
 // Constructor
@@ -73,7 +73,7 @@ void Spacewar::initialize(HWND hwnd)
 	// initialize achievements
 	//const int GREATER_THAN = 1;
 	//const int LESS_THAN = -1;
-	//const int EQUAL_TO = 0; -- These are in constants.h
+	//const int EQUAL_TO = 0; -- These are in constantsHalvorsenMartRoberts.h
 
 	//To create an achievement, push a new Achievement back into the achievements vector. That's it.
 	/* Constructor explanation:

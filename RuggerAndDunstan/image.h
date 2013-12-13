@@ -11,7 +11,7 @@
 class Image;
 
 #include "textureManager.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 
 class Image
 {

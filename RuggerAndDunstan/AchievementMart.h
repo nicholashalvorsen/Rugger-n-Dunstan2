@@ -3,10 +3,10 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "entity.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "textureManager.h"
 #include "image.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 
 #include<vector>
 #include<string>

@@ -11,7 +11,7 @@
 class TextDX;
 
 #include <string>
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "graphics.h"
 
 class TextDX
