@@ -15,7 +15,7 @@ class TextureManager;
 #include <string>
 #include <fstream>
 #include "graphics.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 
 class TextureManager
 {

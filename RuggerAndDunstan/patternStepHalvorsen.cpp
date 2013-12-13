@@ -1,4 +1,4 @@
-#include "patternStep.h"
+#include "patternStepHalvorsen.h"
 
 PatternStep::PatternStep()
 {

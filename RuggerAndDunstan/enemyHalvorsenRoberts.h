@@ -7,11 +7,11 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "entity.h"
-#include "constants.h"
-#include "bullet.h"
-#include "vision.h"
+#include "constantsHalvorsenMartRoberts.h"
+#include "bulletHalvorsen.h"
+#include "visionHalvorsen.h"
 class Enemy1;
-#include "patternStep.h"
+#include "patternStepHalvorsen.h"
 #include <vector>
 using std::vector;
 

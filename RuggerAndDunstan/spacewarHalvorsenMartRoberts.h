@@ -13,13 +13,13 @@
 #include "image.h"
 #include "dashboard.h"
 #include "planet.h"
-#include "ship.h"
+#include "shipHalvorsenRoberts.h"
 #include "torpedo.h"
-#include "Rugger.h"
-#include "Portal.h"
-#include "bullet.h"
-#include "enemy.h"
-#include "Achievement.h"
+#include "RuggerHalvorsenMartRoberts.h"
+#include "PortalMart.h"
+#include "bulletHalvorsen.h"
+#include "enemyHalvorsenRoberts.h"
+#include "AchievementMart.h"
 #include <sstream>
 #include <ctime>
 #include <fstream>
@@ -162,6 +162,7 @@ private:
 	vector<Entity*> walls;
 
 	bool longshot;
+	int intGameTime;
 
 public:
     // Constructor
@@ -186,6 +187,10 @@ public:
 	void playCutscene(int num);
 	void stopCutscene();
 	void getWallPositions();
+
+	bool speedRun;
+	bool moderatelyFastRun;
+	int achievementBonus;
 };
 
 #endif

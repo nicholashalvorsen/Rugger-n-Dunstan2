@@ -3,10 +3,10 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "entity.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 #include "textureManager.h"
 #include "image.h"
-#include "constants.h"
+#include "constantsHalvorsenMartRoberts.h"
 
 #include<vector>
 #include<string>
@@ -227,7 +227,9 @@ public:
 
 	bool hasHappened() {return happened;}
 
-	void testHappened() {
+	bool getDone() {return done;}
+
+	bool testHappened() {
 		if (comparator != achievementNS::JUNK_VALUE) {
 			if (condition == GREATER_THAN) 
 				if (*value>comparator) happened = true;
@@ -247,6 +249,7 @@ public:
 		}else if (variableTester != NULL) {
 			if (*testee == *variableTester) happened = true;
 		}
+		return happened;
 	}
 
 	bool alreadyDid() {return done;}
